@@ -6,7 +6,7 @@
 Ситемные требования
 ОС: семейства GNU Linux, порт под винду будет не скоро.
 2 свободных USB порта.
-25-пиновый переходник нa с RS232 на USB 2x.
+25-пиновый переходник нa с RS232 на USB 2 штуки.
 QT >=  5.9.5.
 G++ >= 7.3.0.
 
@@ -20,6 +20,6 @@ The functionality is minimal.
 System requirements
 OS: GNU Linux family, Windows port will not be available soon.
 2 free USB ports.
-25-pin RS232 to USB 2x adapter.
+25-pin RS232 to USB adapter, 2 devices.
 
 For use outside our lab, change the idn1 and idn2 values to the serial numbers of your devices before compiling.

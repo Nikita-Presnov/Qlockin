@@ -9,11 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
   char idn2[] = "70259";/*{'7','0','2','5','9'};*/
   char idn1[] = "81595";/*{'8','1','5','9','5'};*/
   ui->setupUi(this);
-  ui->lineEdit->setText("400");
+//  ui->lineEdit->setText("400");
   ui->textBrowser->setReadOnly(true);
   ui->stop_botton->setEnabled(false);
-  ui->period_value->setValue(1.0);
-  ui->textBrowser->moveCursor(QTextCursor::End);
+//  ui->period_value->setValue(1.0);
 //  QScrollBar *sb = ui->textBrowser->verticalScrollBar();
 //  sb->setValue(sb->maximum());
   tmr = new QTimer(this); // Создаем объект класса QTimer и передаем адрес переменной
@@ -38,6 +37,8 @@ void MainWindow::updateval()
   loc1->get_data(outr);
   loc2->get_data(outr);
   fprintf(file, "%s\t%s\n", loc1->data, loc2->data);
+
+  ui->textBrowser->moveCursor(QTextCursor::End);
   ui->textBrowser->insertPlainText(QString::number(progressframes));
   ui->textBrowser->insertPlainText(QString::fromStdString("\t"));
 

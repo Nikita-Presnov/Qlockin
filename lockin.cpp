@@ -25,7 +25,7 @@ int screach_lockin(char *idn, char *locname)
     F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
     if(F_ID == -1)
     {
-       printf("It is not correct port");
+       printf("It is not correct port\r");
       }else{
     struct termios options; /*структура для установки порта*/
     tcgetattr(F_ID, &options); /*читает пораметры порта*/
@@ -128,7 +128,7 @@ int lockin::get_data(char *command)
     {
         n = read(F_ID, &data[i], 1);
     }
-    else if(data[i-1]==13)
+    else if(data[i-1]==13)//find '\r'
     {
       data[i] = 0;
       data[i-1]=0;

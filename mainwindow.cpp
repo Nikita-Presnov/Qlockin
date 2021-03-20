@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->textBrowser->setReadOnly(true);
   ui->stop_botton->setEnabled(false);
   ui->period_value->setValue(1.0);
+  ui->textBrowser->moveCursor(QTextCursor::End);
+//  QScrollBar *sb = ui->textBrowser->verticalScrollBar();
+//  sb->setValue(sb->maximum());
   tmr = new QTimer(this); // Создаем объект класса QTimer и передаем адрес переменной
   connect(tmr, SIGNAL(timeout()), this, SLOT(updateval())); // Подключаем сигнал таймера к нашему слоту
 
@@ -34,7 +37,7 @@ void MainWindow::updateval()
   char outr[7] = {'O','U','T','R','?','1','\r'};
   loc1->get_data(outr);
   loc2->get_data(outr);
-  fprintf(file, "%s\t%s\n", loc1->data, loc1->data);
+  fprintf(file, "%s\t%s\n", loc1->data, loc2->data);
   ui->textBrowser->insertPlainText(QString::number(progressframes));
   ui->textBrowser->insertPlainText(QString::fromStdString("\t"));
 

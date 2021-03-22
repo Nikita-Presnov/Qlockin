@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
-  char idn2[] = "70259";/*{'7','0','2','5','9'};*/
-  char idn1[] = "81595";/*{'8','1','5','9','5'};*/
+  char idn2[] = IDN2;//{'7','0','2','5','9'};
+  char idn1[] = IDN1;//{'8','1','5','9','5'};
   ui->setupUi(this);
   ui->textBrowser->setReadOnly(true);
   ui->stop_botton->setEnabled(false);
@@ -20,61 +20,62 @@ MainWindow::MainWindow(QWidget *parent) :
 
   dirname = QFileDialog::getExistingDirectory(this,
                                               tr("Open Directory"),
-                                              "~/Documents");
-  QwtPlotGrid *grid1 = new QwtPlotGrid();
+                                              "Documents");
+  grid1 = new QwtPlotGrid();
   grid1->setMajorPen(QPen(Qt::lightGray, 1));
 //  grid->setMinorPen(QPen(Qt::gray, 2 ));
 
   grid1->enableX(true);
   grid1->enableY(true);
-//  grid->setXAxis();
-  grid1->attach(ui->qwtPlot_opora_r);
-  QwtPlotGrid *grid2 = new QwtPlotGrid();
+  grid1->attach(ui->qwtPlot_pivot_r);
+  grid2 = new QwtPlotGrid();
   grid2->setMajorPen(QPen(Qt::lightGray, 1));
-//  grid->setMinorPen(QPen(Qt::gray, 2 ));
 
   grid2->enableX(true);
   grid2->enableY(true);
-  grid2->attach(ui->qwtPlot_opora_signal);
+  grid2->attach(ui->qwtPlot_pivot_signal);
 
-  // opora r
-  cruve_opora_r = new QwtPlotCurve();
-  cruve_opora_signal = new QwtPlotCurve();
+  // pivot r
+  cruve_pivot_r = new QwtPlotCurve();
+  cruve_pivot_signal = new QwtPlotCurve();
 
-  cruve_opora_r->setPen(Qt::blue, 6);
-  QwtSymbol *symbol1 = new QwtSymbol( QwtSymbol::Ellipse,
+  cruve_pivot_r->setPen(Qt::blue, 3);
+  QwtSymbol *symbol1 = new QwtSymbol(QwtSymbol::Ellipse,
                                      QBrush( Qt::yellow ),
-                                     QPen( Qt::red, 2 ),
-                                     QSize( 8, 8 ) );
-  cruve_opora_r->setSymbol(symbol1);
-//  data_opora_r = new QPolygonF;
-//  cruve_opora_r->setSamples(data_opora_r);
+                                     QPen( Qt::red, 0 ),
+                                     QSize( 4, 4 ) );
+  cruve_pivot_r->setSymbol(symbol1);
+//  data_pivot_r = new QPolygonF;
+//  cruve_pivot_r->setSamples(data_pivot_r);
 
-  // opora signal
-  cruve_opora_signal->setPen(Qt::green, 6);
-  QwtSymbol *symbol2 = new QwtSymbol( QwtSymbol::Ellipse,
-                                     QBrush( Qt::yellow ),
-                                     QPen( Qt::red, 2 ),
-                                     QSize( 8, 8 ) );
-//  data_opora_signal = new QPolygonF;
-  cruve_opora_signal->setSymbol(symbol2);
-//  cruve_opora_signal->setSamples(data_opora_signal);
+  // pivot signal
+  cruve_pivot_signal->setPen(Qt::green, 3);
+  QwtSymbol *symbol2 = new QwtSymbol(QwtSymbol::Ellipse,
+                                     QBrush( Qt::blue ),
+                                     QPen( Qt::red, 0 ),
+                                     QSize( 4, 4 ) );
+//  data_pivot_signal = new QPolygonF;
+  cruve_pivot_signal->setSymbol(symbol2);
+//  cruve_pivot_signal->setSamples(data_pivot_signal);
 
-  cruve_opora_r->attach(ui->qwtPlot_opora_r);
-  cruve_opora_signal->attach(ui->qwtPlot_opora_signal);
+  cruve_pivot_r->attach(ui->qwtPlot_pivot_r);
+  cruve_pivot_signal->attach(ui->qwtPlot_pivot_signal);
 
-  ui->qwtPlot_opora_r->enableAxis(QwtPlot::yRight, true);
-  ui->qwtPlot_opora_r->enableAxis(QwtPlot::xBottom, false);
-  ui->qwtPlot_opora_r->enableAxis(QwtPlot::xTop, true);
-  ui->qwtPlot_opora_r->setAxisTitle(QwtPlot::yLeft, "R");
-  ui->qwtPlot_opora_r->setAxisTitle(QwtPlot::xTop, "Opora");
-  ui->qwtPlot_opora_r->replot();
+//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::yRight, true);
+//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xBottom, false);
+//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::yRight, true);
+//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xBottom, false)
+//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xTop, true);
+//  ui->qwtPlot_pivot_r->setAxisAutoScale(QwtPlot::xTop, true);
+  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::yLeft, "R");
+//  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::xTop, "Pivot");
+  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::xBottom, "Pivot");
+  ui->qwtPlot_pivot_r->replot();
 
-  ui->qwtPlot_opora_signal->enableAxis(QwtPlot::yRight, true);
-  ui->qwtPlot_opora_signal->enableAxis(QwtPlot::xBottom, true);
-  ui->qwtPlot_opora_signal->setAxisTitle(QwtPlot::yLeft, "Signal");
-  ui->qwtPlot_opora_signal->setAxisTitle(QwtPlot::xBottom, "Opora");
-  ui->qwtPlot_opora_signal->replot();
+//  ui->qwtPlot_pivot_signal->enableAxis(QwtPlot::yRight, true);
+  ui->qwtPlot_pivot_signal->setAxisTitle(QwtPlot::yLeft, "Signal");
+  ui->qwtPlot_pivot_signal->setAxisTitle(QwtPlot::xBottom, "Pivot");
+  ui->qwtPlot_pivot_signal->replot();
 
 
 
@@ -83,22 +84,51 @@ MainWindow::MainWindow(QWidget *parent) :
   screach_lockin(idn1, name1);
   screach_lockin(idn2, name2);
 
-  loc1 = new lockin(name1);
-  loc2 = new lockin(name2);
+  loc1 = new lockin();
+  if(!loc1->init(name1))
+    {
+      QMessageBox msbox;
+      msbox.setText("No locin with id 81595 for pivot.");
+      msbox.exec();
+    }
+  loc2 = new lockin();
+  if(!loc2->init(name2))
+    {
+      QMessageBox msbox;
+      msbox.setText("No locin with id 70259 for signal.");
+      msbox.exec();
+    }
 }
 
 MainWindow::~MainWindow()
 {
   delete loc1;
   delete loc2;
+  delete tmr;
+  delete cruve_pivot_r;
+  delete cruve_pivot_signal;
+  delete grid1;
+  delete grid2;
   delete ui;
 }
 
 void MainWindow::updateval()
 {
   char outr[7] = {'O','U','T','R','?','1','\r'};
-  loc1->get_data(outr);
-  loc2->get_data(outr);
+  if(!loc1->get_data(outr))
+    {
+      QMessageBox msbox;
+      msbox.setText("No connection with locin 81595 (pivot).");
+      msbox.exec();
+      progressframes = numberframes;
+    }
+  if(!loc2->get_data(outr))
+    {
+      QMessageBox msbox;
+      msbox.setText("No connection with locin 70259 (signal).");
+      msbox.exec();
+      progressframes = numberframes;
+    }
   QTextStream outdata (&outputfile);
   outdata << loc1->data << '\t' << loc1->data << '\n';
   // Данные для первой кривой
@@ -122,15 +152,11 @@ void MainWindow::updateval()
   ui->textBrowser->insertPlainText(QString::fromStdString(loc2->data));
   ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
   ui->textBrowser->moveCursor(QTextCursor::End);
-//  data_opora_r << QPointF( progressframes, progressframes );
-//  cruve_opora_r->setSamples(data_opora_r);
-//  data_opora_signal << QPointF( progressframes, progressframes );
-//  cruve_opora_r->setData();
-//  cruve_opora_signal->setData();
-  cruve_opora_r->setSamples(X1,Y1,numberframes);
-  cruve_opora_signal->setSamples(X2,Y2,numberframes);
-  ui->qwtPlot_opora_r->replot();
-  ui->qwtPlot_opora_signal->replot();
+
+  cruve_pivot_r->setSamples(X1,Y1,numberframes);
+  cruve_pivot_signal->setSamples(X2,Y2,numberframes);
+  ui->qwtPlot_pivot_r->replot();
+  ui->qwtPlot_pivot_signal->replot();
   progressframes++;
   if (numberframes<=progressframes)
     {
@@ -161,9 +187,9 @@ void MainWindow::on_start_botton_clicked()
   else
     {
 
-      outputfile.write("opora_81595\tsignal_70259\n");
+      outputfile.write("pivot_81595\tsignal_70259\n");
       ui->textBrowser->clear();
-      ui->textBrowser->insertPlainText(QString::fromStdString("number\topora_81595\tsignal_70259\n"));
+      ui->textBrowser->insertPlainText(QString::fromStdString("number\tpivot_81595\tsignal_70259\n"));
       period = (int)((ui->period_value->value())*1000);
       tmr->setInterval(period);
       tmr->start(); // Запускаем таймер
@@ -176,8 +202,8 @@ void MainWindow::on_start_botton_clicked()
       Y1 = X1 + numberframes;
       X2 = (double *)malloc((2*numberframes)*sizeof(double));
       Y2 = X2 + numberframes;
-//      data_opora_r = new QPolygonF;
-//      cruve_opora_r->setSamples(data_opora_r);
+//      data_pivot_r = new QPolygonF;
+//      cruve_pivot_r->setSamples(data_pivot_r);
     }
 }
 
@@ -196,5 +222,31 @@ void MainWindow::on_dir_button_clicked()
 {
   dirname = QFileDialog::getExistingDirectory(this,
                                               tr("Open Directory"),
-                                              "~/Documents");
+                                              "Documents");
+}
+
+void MainWindow::on_rescan_button_clicked()
+{
+  char idn2[] = IDN2;//{'7','0','2','5','9'};
+  char idn1[] = IDN1;//{'8','1','5','9','5'};
+
+  char name1[PORT_NAME_LEN];
+  char name2[PORT_NAME_LEN];
+
+  screach_lockin(idn1, name1);
+  screach_lockin(idn2, name2);
+
+  if(!loc1->init(name1))
+    {
+      QMessageBox msbox;
+      msbox.setText("No locin with id 81595 for pivot.");
+      msbox.exec();
+    }
+
+  if(!loc2->init(name2))
+    {
+      QMessageBox msbox;
+      msbox.setText("No locin with id 70259 for signal.");
+      msbox.exec();
+    }
 }

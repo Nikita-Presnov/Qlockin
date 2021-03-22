@@ -33,21 +33,16 @@ private:
   QTimer *tmr; //Адресная переменная таймера
   lockin *loc1;
   lockin *loc2;
-  QSerialPort *locin1;
-  QSerialPort *locin2;
-  FILE *file;
-  QwtPlotCurve *cruve_opora_r;
-  QwtPlotCurve *cruve_opora_signal;
-  QwtSymbol *symbol1;
-  QwtSymbol *symbol2;
-//  QPoint *points_opora_r;
-//  QPoint *points_opora_signal;
+//  QSerialPort *locin1;
+//  QSerialPort *locin2;
+  QwtPlotCurve *cruve_pivot_r, *cruve_pivot_signal;
+  QwtPlotGrid *grid1, *grid2;
+//  QPoint *points_pivot_r;
+//  QPoint *points_pivot_signal;
   double *X1;
   double *Y1;
   double *X2;
   double *Y2;
-  QPolygonF *data_opora_r;
-  QPolygonF *data_opora_signal;
   QFile outputfile;
   QString dirname;
   int numberframes = 0;
@@ -58,6 +53,7 @@ private slots:
   void on_start_botton_clicked();
   void on_stop_botton_clicked();
   void on_dir_button_clicked();
+  void on_rescan_button_clicked();
   void updateval();
 };
 

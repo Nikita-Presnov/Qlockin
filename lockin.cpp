@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int screach_lockin(char *idn, char *locname)
+bool screach_lockin(char *idn, char *locname)
 {
 //  if(strlen(locname)!=12)
 //  {
@@ -20,7 +20,7 @@ int screach_lockin(char *idn, char *locname)
 //  comname[11]=0;
   char buff[64];
   int F_ID, number = 11;
-  for(int i=0;i<10;i++)
+  for(int i=0; i<10; i++)
   {
     F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
     if(F_ID == -1);
@@ -62,10 +62,8 @@ int screach_lockin(char *idn, char *locname)
             {
               locname[j] = comname[j];
             }
-          return 1;
+          return true;
         }
-      else
-        printf("%s is not correct port\n", comname);
     }
     comname[number]++;
 //    if(comname[number]>'9' && number == 10)
@@ -81,16 +79,20 @@ int screach_lockin(char *idn, char *locname)
 //    }
   }
 
-  printf("No locins with this id\n");
-  return 0;
+//  printf("No locins with this id\n");
+  return false;
 }
 
-lockin::lockin(char *comname)
+lockin::lockin()
+{
+}
+bool lockin::init(char *comname)
 {
   F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
   if(F_ID == -1)
     {
-       printf("connection lost\n");
+//       printf("connection lost\n");
+      return false;
     }
   struct termios options; /*структура для установки порта*/
   tcgetattr(F_ID, &options); /*читает пораметры порта*/
@@ -110,6 +112,7 @@ lockin::lockin(char *comname)
   options.c_iflag = 0;
   options.c_iflag &= ~ (INLCR | IGNCR | ICRNL);
   tcsetattr(F_ID, TCSANOW, &options);
+  return true;
 }
 
 int lockin::send_command(char *command)
@@ -117,12 +120,15 @@ int lockin::send_command(char *command)
   return write(F_ID, command, strlen(command));
 }
 
-int lockin::get_data(char *command)
+bool lockin::get_data(char *command)
 {
   int n = write(F_ID, command, strlen(command));
+  if(n == -1)
+    return false;
   int i=0;
   bool f=true;
   n = read(F_ID, &data[i], 1);
+//  printf("%i\n",n);
   i++;
   for (;i<20;i++)
   {
@@ -141,5 +147,5 @@ int lockin::get_data(char *command)
       data[i] = 0;
     }
   }
-  return 0;
+  return true;
 }

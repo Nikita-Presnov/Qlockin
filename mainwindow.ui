@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>792</width>
-    <height>482</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,24 +18,11 @@
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QPushButton" name="rescan_button">
         <property name="text">
-         <string>Locin 1 opora</string>
+         <string>Rescan locins</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="locin1_chose"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Locin 2 signal</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="locin2_chose"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -140,7 +127,7 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QwtPlot" name="qwtPlot_opora_r">
+       <widget class="QwtPlot" name="qwtPlot_pivot_r">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -159,7 +146,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QwtPlot" name="qwtPlot_opora_signal">
+       <widget class="QwtPlot" name="qwtPlot_pivot_signal">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
           <horstretch>0</horstretch>

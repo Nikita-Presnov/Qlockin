@@ -1,12 +1,15 @@
 #ifndef LOCKIN_H
 #define LOCKIN_H
 #define PORT_NAME_LEN 13
-int screach_lockin(char *idn, char *locname);
+#define IDN1 "81595"
+#define IDN2 "70259"
+bool screach_lockin(char *idn, char *locname);
 class lockin
 {
 public:
-  lockin(char *comname);
-  int get_data(char *command);
+  lockin();
+  bool init(char *comname);
+  bool get_data(char *command);
   int send_command(char *command);
   int F_ID;
   char data[20];

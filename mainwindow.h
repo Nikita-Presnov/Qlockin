@@ -10,6 +10,7 @@
 #include <QFile>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_grid.h>
+#include <qwt_plot_picker.h>
 #include <qwt_symbol.h>
 
 
@@ -35,13 +36,14 @@ private:
   lockin *loc2;
 //  QSerialPort *locin1;
 //  QSerialPort *locin2;
-  QwtPlotCurve *cruve_pivot_r, *cruve_pivot_signal;
-  QwtPlotGrid *grid1, *grid2;
-//  QPoint *points_pivot_r;
-//  QPoint *points_pivot_signal;
-  double *X1;
+  QwtPlotPicker *d_picker1;
+  QwtPlotPicker *d_picker2;
+  QwtPlotCurve *cruve_refrence_r;
+  QwtPlotCurve *cruve_refrence_signal;
+  QwtPlotGrid *grid1;
+  QwtPlotGrid *grid2;
+  double *X;
   double *Y1;
-  double *X2;
   double *Y2;
   QFile outputfile;
   QString dirname;

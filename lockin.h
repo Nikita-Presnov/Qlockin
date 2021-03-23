@@ -9,7 +9,7 @@ class lockin
 public:
   lockin();
   bool init(char *comname);
-  bool get_data(char *command);
+  bool get_data();//char *command);
   int send_command(char *command);
   int F_ID;
   char data[20];

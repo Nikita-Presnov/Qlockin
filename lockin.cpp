@@ -120,15 +120,15 @@ int lockin::send_command(char *command)
   return write(F_ID, command, strlen(command));
 }
 
-bool lockin::get_data(char *command)
+bool lockin::get_data()//char *command)
 {
-  int n = write(F_ID, command, strlen(command));
-  if(n == -1)
-    return false;
+//  int n = write(F_ID, command, strlen(command));
   int i=0;
   bool f=true;
-  n = read(F_ID, &data[i], 1);
-//  printf("%i\n",n);
+  int n = read(F_ID, &data[i], 1);
+//  printf("%i\n", n);
+  if(n == 0)
+    return false;
   i++;
   for (;i<20;i++)
   {

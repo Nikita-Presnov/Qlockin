@@ -3,7 +3,7 @@
 #include <QFileDialog>
 #include <QTime>
 #include <QMessageBox>
-#include <math.h>
+#include <qwt_picker_machine.h>
 #include <malloc.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,55 +27,59 @@ MainWindow::MainWindow(QWidget *parent) :
 
   grid1->enableX(true);
   grid1->enableY(true);
-  grid1->attach(ui->qwtPlot_pivot_r);
+  grid1->attach(ui->qwtPlot_refrence_r);
   grid2 = new QwtPlotGrid();
   grid2->setMajorPen(QPen(Qt::lightGray, 1));
 
   grid2->enableX(true);
   grid2->enableY(true);
-  grid2->attach(ui->qwtPlot_pivot_signal);
+  grid2->attach(ui->qwtPlot_refrence_signal);
 
-  // pivot r
-  cruve_pivot_r = new QwtPlotCurve();
-  cruve_pivot_signal = new QwtPlotCurve();
+  QwtPlotPicker *d_picker1 = new QwtPlotPicker(
+      QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
+      QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
+      QwtPicker::ActiveOnly, // включение/выключение
+      ui->qwtPlot_refrence_r->canvas() ); // ассоциация с полем
+  d_picker1->setRubberBandPen( QColor( Qt::red ) );
+  d_picker1->setTrackerPen( QColor( Qt::black ) );
+  d_picker1->setStateMachine( new QwtPickerDragPointMachine() );
 
-  cruve_pivot_r->setPen(Qt::blue, 3);
+  QwtPlotPicker *d_picker2 = new QwtPlotPicker(
+      QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
+      QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
+      QwtPicker::ActiveOnly, // включение/выключение
+      ui->qwtPlot_refrence_signal->canvas() ); // ассоциация с полем
+  d_picker2->setRubberBandPen( QColor( Qt::red ) );
+  d_picker2->setTrackerPen( QColor( Qt::black ) );
+  d_picker2->setStateMachine( new QwtPickerDragPointMachine() );
+
+  cruve_refrence_r = new QwtPlotCurve();
+  cruve_refrence_signal = new QwtPlotCurve();
+  cruve_refrence_r->setPen(Qt::blue, 3);
   QwtSymbol *symbol1 = new QwtSymbol(QwtSymbol::Ellipse,
                                      QBrush( Qt::yellow ),
                                      QPen( Qt::red, 0 ),
                                      QSize( 4, 4 ) );
-  cruve_pivot_r->setSymbol(symbol1);
-//  data_pivot_r = new QPolygonF;
-//  cruve_pivot_r->setSamples(data_pivot_r);
+  cruve_refrence_r->setSymbol(symbol1);
 
-  // pivot signal
-  cruve_pivot_signal->setPen(Qt::green, 3);
+  cruve_refrence_signal->setPen(Qt::green, 3);
   QwtSymbol *symbol2 = new QwtSymbol(QwtSymbol::Ellipse,
                                      QBrush( Qt::blue ),
                                      QPen( Qt::red, 0 ),
                                      QSize( 4, 4 ) );
-//  data_pivot_signal = new QPolygonF;
-  cruve_pivot_signal->setSymbol(symbol2);
-//  cruve_pivot_signal->setSamples(data_pivot_signal);
+  cruve_refrence_signal->setSymbol(symbol2);
 
-  cruve_pivot_r->attach(ui->qwtPlot_pivot_r);
-  cruve_pivot_signal->attach(ui->qwtPlot_pivot_signal);
+  cruve_refrence_r->attach(ui->qwtPlot_refrence_r);
+  cruve_refrence_signal->attach(ui->qwtPlot_refrence_signal);
 
-//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::yRight, true);
-//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xBottom, false);
-//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::yRight, true);
-//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xBottom, false)
-//  ui->qwtPlot_pivot_r->enableAxis(QwtPlot::xTop, true);
-//  ui->qwtPlot_pivot_r->setAxisAutoScale(QwtPlot::xTop, true);
-  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::yLeft, "R");
-//  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::xTop, "Pivot");
-  ui->qwtPlot_pivot_r->setAxisTitle(QwtPlot::xBottom, "Pivot");
-  ui->qwtPlot_pivot_r->replot();
 
-//  ui->qwtPlot_pivot_signal->enableAxis(QwtPlot::yRight, true);
-  ui->qwtPlot_pivot_signal->setAxisTitle(QwtPlot::yLeft, "Signal");
-  ui->qwtPlot_pivot_signal->setAxisTitle(QwtPlot::xBottom, "Pivot");
-  ui->qwtPlot_pivot_signal->replot();
+  ui->qwtPlot_refrence_r->setAxisTitle(QwtPlot::yLeft, "R");
+  ui->qwtPlot_refrence_r->setAxisTitle(QwtPlot::xBottom, "Refrence, 81595, mV");
+  ui->qwtPlot_refrence_r->replot();
+
+  ui->qwtPlot_refrence_signal->setAxisTitle(QwtPlot::yLeft, "Signal, 70259, mV");
+  ui->qwtPlot_refrence_signal->setAxisTitle(QwtPlot::xBottom, "Refrence, 81595, mV");
+  ui->qwtPlot_refrence_signal->replot();
 
 
 
@@ -88,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent) :
   if(!loc1->init(name1))
     {
       QMessageBox msbox;
-      msbox.setText("No locin with id 81595 for pivot.");
+      msbox.setText("No locin with id 81595 for refrence.");
       msbox.exec();
     }
   loc2 = new lockin();
@@ -102,27 +106,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-  delete loc1;
-  delete loc2;
-  delete tmr;
-  delete cruve_pivot_r;
-  delete cruve_pivot_signal;
-  delete grid1;
-  delete grid2;
+//  delete loc1;
+//  delete loc2;
+//  delete tmr;
+//  delete cruve_refrence_r;
+//  delete cruve_refrence_signal;
+//  delete grid1;
+//  delete grid2;
   delete ui;
 }
 
 void MainWindow::updateval()
 {
   char outr[7] = {'O','U','T','R','?','1','\r'};
-  if(!loc1->get_data(outr))
+  loc1->send_command(outr);
+  loc2->send_command(outr);
+  if(!loc1->get_data())
     {
       QMessageBox msbox;
-      msbox.setText("No connection with locin 81595 (pivot).");
+      msbox.setText("No connection with locin 81595 (refrence).");
       msbox.exec();
       progressframes = numberframes;
     }
-  if(!loc2->get_data(outr))
+  if(!loc2->get_data())
     {
       QMessageBox msbox;
       msbox.setText("No connection with locin 70259 (signal).");
@@ -130,33 +136,33 @@ void MainWindow::updateval()
       progressframes = numberframes;
     }
   QTextStream outdata (&outputfile);
-  outdata << loc1->data << '\t' << loc1->data << '\n';
-  // Данные для первой кривой
-  double h = 8./(numberframes-1);
-  for (int k = 0; k < numberframes; k++)
-  {
-    X1[k] = k*h;
-    Y1[k] = cos(M_PI*X1[k]-5*M_PI/12+0.01*M_PI*double(progressframes));
-  }
-  // Данные для второй кривой
-  h = 8./(numberframes-1);
-  for (int k = 0; k < numberframes; k++)
-  {
-    X2[k] = k*h;
-    Y2[k] = 0.7 * cos(8*M_PI*X2[k]+M_PI/9+0.01*M_PI*double(progressframes));
-  }
-  ui->textBrowser->insertPlainText(QString::number(progressframes));
-  ui->textBrowser->insertPlainText(QString::fromStdString("\t"));
-  ui->textBrowser->insertPlainText(QString::fromStdString(loc1->data));
-  ui->textBrowser->insertPlainText(QString::fromStdString("\t"));
-  ui->textBrowser->insertPlainText(QString::fromStdString(loc2->data));
-  ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
-  ui->textBrowser->moveCursor(QTextCursor::End);
 
-  cruve_pivot_r->setSamples(X1,Y1,numberframes);
-  cruve_pivot_signal->setSamples(X2,Y2,numberframes);
-  ui->qwtPlot_pivot_r->replot();
-  ui->qwtPlot_pivot_signal->replot();
+  QString qdata1 = QString(loc1->data);
+  QString qdata2 = QString(loc2->data);
+  X[progressframes] = qdata1.toDouble()*1000;
+  Y1[progressframes] = qdata2.toDouble()*1000;
+  if(X[progressframes]!=0)
+    {
+      Y2[progressframes] = Y1[progressframes]/X[progressframes];
+      ui->textBrowser->insertPlainText(QString::number(progressframes));
+      ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+      ui->textBrowser->insertPlainText(QString::number(X[progressframes], 'g', 3));
+      ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+      ui->textBrowser->insertPlainText(QString::number(Y1[progressframes], 'g', 3));
+      ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+      ui->textBrowser->insertPlainText(QString::number(Y2[progressframes], 'g', 3));
+      ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
+      ui->textBrowser->moveCursor(QTextCursor::End);
+      outdata << progressframes << '\t';
+      outdata << X[progressframes] << '\t';
+      outdata << Y1[progressframes] << '\t';
+      outdata << Y2[progressframes] << '\n';
+
+      cruve_refrence_r->setSamples(X,Y2,progressframes);
+      cruve_refrence_signal->setSamples(X,Y1,progressframes);
+      ui->qwtPlot_refrence_r->replot();
+      ui->qwtPlot_refrence_signal->replot();
+    }
   progressframes++;
   if (numberframes<=progressframes)
     {
@@ -164,9 +170,9 @@ void MainWindow::updateval()
       tmr->stop();
       ui->start_botton->setEnabled(true);
       ui->stop_botton->setEnabled(false);
+      ui->dir_button->setEnabled(true);
       outputfile.close();
-      free((void *)X1);
-      free((void *)X2);
+      free((void *)X);
 //      fclose(file);
     }
 }
@@ -187,9 +193,9 @@ void MainWindow::on_start_botton_clicked()
   else
     {
 
-      outputfile.write("pivot_81595\tsignal_70259\n");
+      outputfile.write("n\trefrence\tsignal\tR\n");
       ui->textBrowser->clear();
-      ui->textBrowser->insertPlainText(QString::fromStdString("number\tpivot_81595\tsignal_70259\n"));
+      ui->textBrowser->insertPlainText(QString::fromStdString("number refrence signal R\n"));
       period = (int)((ui->period_value->value())*1000);
       tmr->setInterval(period);
       tmr->start(); // Запускаем таймер
@@ -198,12 +204,9 @@ void MainWindow::on_start_botton_clicked()
       ui->start_botton->setEnabled(false);
       ui->stop_botton->setEnabled(true);
       ui->dir_button->setEnabled(false);
-      X1 = (double *)malloc((2*numberframes)*sizeof(double));
-      Y1 = X1 + numberframes;
-      X2 = (double *)malloc((2*numberframes)*sizeof(double));
-      Y2 = X2 + numberframes;
-//      data_pivot_r = new QPolygonF;
-//      cruve_pivot_r->setSamples(data_pivot_r);
+      X = (double *)malloc((3*numberframes)*sizeof(double));
+      Y1 = X + numberframes;
+      Y2 = Y1 + numberframes;
     }
 }
 
@@ -213,8 +216,7 @@ void MainWindow::on_stop_botton_clicked()
   ui->start_botton->setEnabled(true);
   ui->stop_botton->setEnabled(false);
   ui->dir_button->setEnabled(true);
-  free((void *)X1);
-  free((void *)X2);
+  free((void *)X);
   outputfile.close();
 }
 
@@ -239,7 +241,7 @@ void MainWindow::on_rescan_button_clicked()
   if(!loc1->init(name1))
     {
       QMessageBox msbox;
-      msbox.setText("No locin with id 81595 for pivot.");
+      msbox.setText("No locin with id 81595 for refrence.");
       msbox.exec();
     }
 

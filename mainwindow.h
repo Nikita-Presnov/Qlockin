@@ -5,8 +5,8 @@
 #include <QString>
 #include <QTimer>
 #include <QTime>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
+//#include <QtSerialPort/QSerialPort>
+//#include <QtSerialPort/QSerialPortInfo>
 #include <QFile>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_grid.h>

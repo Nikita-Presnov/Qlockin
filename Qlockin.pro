@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += /usr/include/qwt
 LIBS += -L/usr/lib -lqwt-qt5
-QT += serialport
+#QT += serialport
 
 SOURCES += \
         main.cpp \

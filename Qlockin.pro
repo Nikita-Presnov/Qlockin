@@ -1,16 +1,19 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2020-12-14T15:39:45
-#
-#-------------------------------------------------
-
+# enter qmake CONFIG+=debug in shell to debug
 QT       += core gui
-CONFIG   += qt debug
+CONFIG   += qt
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = bin/Qlockin
-OBJECTS_DIR = /obj
+CONFIG(debug, debug|release){
+    DESTDIR = build/debug
+    OBJECTS_DIR = build/debug/obj
+    message(Debug)
+} else {
+    DESTDIR = build/release
+    OBJECTS_DIR = build/release/obj
+    message(Release)
+}
+
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use

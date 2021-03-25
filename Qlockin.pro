@@ -9,7 +9,8 @@ CONFIG   += qt debug
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Qlockin
+TARGET = bin/Qlockin
+OBJECTS_DIR = /obj
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,7 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += /usr/include/qwt
 LIBS += -L/usr/lib -lqwt-qt5
-#QT += serialport
+# QT += serialport
 
 SOURCES += \
         main.cpp \

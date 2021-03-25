@@ -1,8 +1,7 @@
-Qlockin
 ui_mainwindow.h
 moc_predefs.h
-Makefile
 *.o
 .qmake.stash
 moc_mainwindow.cpp
 *.dat
+bin/

@@ -27,19 +27,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
   grid1->enableX(true);
   grid1->enableY(true);
-  grid1->attach(ui->qwtPlot_refrence_r);
+  grid1->attach(ui->qwtPlot_reference_r);
   grid2 = new QwtPlotGrid();
   grid2->setMajorPen(QPen(Qt::lightGray, 1));
 
   grid2->enableX(true);
   grid2->enableY(true);
-  grid2->attach(ui->qwtPlot_refrence_signal);
+  grid2->attach(ui->qwtPlot_reference_signal);
 
   QwtPlotPicker *d_picker1 = new QwtPlotPicker(
       QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
       QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
       QwtPicker::ActiveOnly, // включение/выключение
-      ui->qwtPlot_refrence_r->canvas() ); // ассоциация с полем
+      ui->qwtPlot_reference_r->canvas() ); // ассоциация с полем
   d_picker1->setRubberBandPen( QColor( Qt::red ) );
   d_picker1->setTrackerPen( QColor( Qt::black ) );
   d_picker1->setStateMachine( new QwtPickerDragPointMachine() );
@@ -48,38 +48,38 @@ MainWindow::MainWindow(QWidget *parent) :
       QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
       QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
       QwtPicker::ActiveOnly, // включение/выключение
-      ui->qwtPlot_refrence_signal->canvas() ); // ассоциация с полем
+      ui->qwtPlot_reference_signal->canvas() ); // ассоциация с полем
   d_picker2->setRubberBandPen( QColor( Qt::red ) );
   d_picker2->setTrackerPen( QColor( Qt::black ) );
   d_picker2->setStateMachine( new QwtPickerDragPointMachine() );
 
-  cruve_refrence_r = new QwtPlotCurve();
-  cruve_refrence_signal = new QwtPlotCurve();
-  cruve_refrence_r->setPen(Qt::blue, 3);
+  cruve_reference_r = new QwtPlotCurve();
+  cruve_reference_signal = new QwtPlotCurve();
+  cruve_reference_r->setPen(Qt::blue, 3);
   QwtSymbol *symbol1 = new QwtSymbol(QwtSymbol::Ellipse,
                                      QBrush( Qt::yellow ),
                                      QPen( Qt::red, 0 ),
                                      QSize( 4, 4 ) );
-  cruve_refrence_r->setSymbol(symbol1);
+  cruve_reference_r->setSymbol(symbol1);
 
-  cruve_refrence_signal->setPen(Qt::green, 3);
+  cruve_reference_signal->setPen(Qt::green, 3);
   QwtSymbol *symbol2 = new QwtSymbol(QwtSymbol::Ellipse,
                                      QBrush( Qt::blue ),
                                      QPen( Qt::red, 0 ),
                                      QSize( 4, 4 ) );
-  cruve_refrence_signal->setSymbol(symbol2);
+  cruve_reference_signal->setSymbol(symbol2);
 
-  cruve_refrence_r->attach(ui->qwtPlot_refrence_r);
-  cruve_refrence_signal->attach(ui->qwtPlot_refrence_signal);
+  cruve_reference_r->attach(ui->qwtPlot_reference_r);
+  cruve_reference_signal->attach(ui->qwtPlot_reference_signal);
 
 
-  ui->qwtPlot_refrence_r->setAxisTitle(QwtPlot::yLeft, "R");
-  ui->qwtPlot_refrence_r->setAxisTitle(QwtPlot::xBottom, "Refrence, 81595, mV");
-  ui->qwtPlot_refrence_r->replot();
+  ui->qwtPlot_reference_r->setAxisTitle(QwtPlot::yLeft, "R");
+  ui->qwtPlot_reference_r->setAxisTitle(QwtPlot::xBottom, "reference, 81595, mV");
+  ui->qwtPlot_reference_r->replot();
 
-  ui->qwtPlot_refrence_signal->setAxisTitle(QwtPlot::yLeft, "Signal, 70259, mV");
-  ui->qwtPlot_refrence_signal->setAxisTitle(QwtPlot::xBottom, "Refrence, 81595, mV");
-  ui->qwtPlot_refrence_signal->replot();
+  ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::yLeft, "Signal, 70259, mV");
+  ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::xBottom, "reference, 81595, mV");
+  ui->qwtPlot_reference_signal->replot();
 
 
 
@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent) :
   if(!loc1->init(name1))
     {
       QMessageBox msbox;
-      msbox.setText("No locin with id 81595 for refrence.");
+      msbox.setText("No locin with id 81595 for reference.");
       msbox.exec();
     }
   loc2 = new lockin();
@@ -109,8 +109,8 @@ MainWindow::~MainWindow()
 //  delete loc1;
 //  delete loc2;
 //  delete tmr;
-//  delete cruve_refrence_r;
-//  delete cruve_refrence_signal;
+//  delete cruve_reference_r;
+//  delete cruve_reference_signal;
 //  delete grid1;
 //  delete grid2;
   delete ui;
@@ -124,7 +124,7 @@ void MainWindow::updateval()
   if(!loc1->get_data())
     {
       QMessageBox msbox;
-      msbox.setText("No connection with locin 81595 (refrence).");
+      msbox.setText("No connection with locin 81595 (reference).");
       msbox.exec();
       progressframes = numberframes;
     }
@@ -158,10 +158,10 @@ void MainWindow::updateval()
       outdata << Y1[progressframes] << '\t';
       outdata << Y2[progressframes] << '\n';
 
-      cruve_refrence_r->setSamples(X,Y2,progressframes);
-      cruve_refrence_signal->setSamples(X,Y1,progressframes);
-      ui->qwtPlot_refrence_r->replot();
-      ui->qwtPlot_refrence_signal->replot();
+      cruve_reference_r->setSamples(X,Y2,progressframes);
+      cruve_reference_signal->setSamples(X,Y1,progressframes);
+      ui->qwtPlot_reference_r->replot();
+      ui->qwtPlot_reference_signal->replot();
     }
   progressframes++;
   if (numberframes<=progressframes)
@@ -193,9 +193,9 @@ void MainWindow::on_start_botton_clicked()
   else
     {
 
-      outputfile.write("n\trefrence\tsignal\tR\n");
+      outputfile.write("n\treference\tsignal\tR\n");
       ui->textBrowser->clear();
-      ui->textBrowser->insertPlainText(QString::fromStdString("number refrence signal R\n"));
+      ui->textBrowser->insertPlainText(QString::fromStdString("number reference signal R\n"));
       period = (int)((ui->period_value->value())*1000);
       tmr->setInterval(period);
       tmr->start(); // Запускаем таймер
@@ -241,7 +241,7 @@ void MainWindow::on_rescan_button_clicked()
   if(!loc1->init(name1))
     {
       QMessageBox msbox;
-      msbox.setText("No locin with id 81595 for refrence.");
+      msbox.setText("No locin with id 81595 for reference.");
       msbox.exec();
     }
 

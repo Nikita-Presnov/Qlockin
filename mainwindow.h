@@ -38,8 +38,8 @@ private:
 //  QSerialPort *locin2;
   QwtPlotPicker *d_picker1;
   QwtPlotPicker *d_picker2;
-  QwtPlotCurve *cruve_refrence_r;
-  QwtPlotCurve *cruve_refrence_signal;
+  QwtPlotCurve *cruve_reference_r;
+  QwtPlotCurve *cruve_reference_signal;
   QwtPlotGrid *grid1;
   QwtPlotGrid *grid2;
   double *X;

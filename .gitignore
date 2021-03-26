@@ -4,3 +4,4 @@ moc_mainwindow.cpp
 .qmake.stash
 build/
 Makefile
+*.dat

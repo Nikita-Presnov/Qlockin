@@ -73,11 +73,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
   ui->qwtPlot_reference_r->setAxisTitle(QwtPlot::yLeft, "R");
-  ui->qwtPlot_reference_r->setAxisTitle(QwtPlot::xBottom, "reference, 81595, mV");
+  ui->qwtPlot_reference_r->setAxisTitle(QwtPlot::xBottom, "Reference, 81595, mV");
   ui->qwtPlot_reference_r->replot();
 
   ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::yLeft, "Signal, 70259, mV");
-  ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::xBottom, "reference, 81595, mV");
+  ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::xBottom, "Reference, 81595, mV");
   ui->qwtPlot_reference_signal->replot();
 
 
@@ -178,13 +178,12 @@ void MainWindow::updateval()
 
 void MainWindow::on_start_botton_clicked()
 {
-  QString filename = dirname;
-  filename.append(QString::fromStdString("/"));
-  filename.append(ui->prename->text());
-  filename.append(QDateTime::currentDateTime().toString("_dd-MM-yyyy_HH-mm-ss"));
-  filename.append(QString::fromStdString(".dat"));
+    QString filename = dirname;
+    filename.append(QDateTime::currentDateTime().toString("/dd-MM-yyyy_HH-mm-ss_"));
+    filename.append(ui->prename->text());
+    filename.append(QString::fromStdString(".dat"));
 //   qDebug() << filename;
-  outputfile.setFileName(filename);
+    outputfile.setFileName(filename);
   if(!outputfile.open(QIODevice::WriteOnly))
     {
       QMessageBox msbox;
@@ -201,7 +200,7 @@ void MainWindow::on_start_botton_clicked()
       tmr->setInterval(period);
       tmr->start();
       progressframes = 0;
-      numberframes = ui->lineEdit->text().toInt();
+      numberframes = ui->numer_frame->text().toInt();
       ui->start_botton->setEnabled(false);
       ui->stop_botton->setEnabled(true);
       ui->dir_button->setEnabled(false);

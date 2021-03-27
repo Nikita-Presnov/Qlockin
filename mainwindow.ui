@@ -93,7 +93,7 @@
       <item>
        <widget class="QPushButton" name="rescan_button">
         <property name="text">
-         <string>Rescan locins</string>
+         <string>Rescan lockins</string>
         </property>
        </widget>
       </item>
@@ -134,7 +134,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="numer_frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -202,6 +202,13 @@
         </property>
         <property name="text">
          <string>test</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Numer</string>
         </property>
        </widget>
       </item>

@@ -31,7 +31,7 @@ public:
 
 private:
   Ui::MainWindow *ui;
-  QTimer *tmr; //Адресная переменная таймера
+  QTimer *tmr;
   lockin *loc1;
   lockin *loc2;
 //  QSerialPort *locin1;

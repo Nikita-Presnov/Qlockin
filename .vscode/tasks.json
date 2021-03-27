@@ -4,9 +4,27 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "debug",
             "type": "shell",
-            "command": "make -j8",
+            "command": "qmake CONFIG+=debug && make -j8",
+            "group": {
+				"kind": "build",
+				"isDefault": true,
+			}
+        },
+        {
+            "label": "release",
+            "type": "shell",
+            "command": "qmake && make -j8",
+            "group": {
+				"kind": "build",
+				"isDefault": true,
+			}
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean",
             "group": {
 				"kind": "build",
 				"isDefault": true,

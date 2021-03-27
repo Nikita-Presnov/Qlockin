@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                               "Documents");
   grid1 = new QwtPlotGrid();
   grid1->setMajorPen(QPen(Qt::lightGray, 1));
-//  grid->setMinorPen(QPen(Qt::gray, 2 ));
 
   grid1->enableX(true);
   grid1->enableY(true);
@@ -36,19 +35,19 @@ MainWindow::MainWindow(QWidget *parent) :
   grid2->attach(ui->qwtPlot_reference_signal);
 
   QwtPlotPicker *d_picker1 = new QwtPlotPicker(
-      QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
-      QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
-      QwtPicker::ActiveOnly, // включение/выключение
-      ui->qwtPlot_reference_r->canvas() ); // ассоциация с полем
+      QwtPlot::xBottom, QwtPlot::yLeft,
+      QwtPlotPicker::CrossRubberBand,
+      QwtPicker::ActiveOnly,
+      ui->qwtPlot_reference_r->canvas() );
   d_picker1->setRubberBandPen( QColor( Qt::red ) );
   d_picker1->setTrackerPen( QColor( Qt::black ) );
   d_picker1->setStateMachine( new QwtPickerDragPointMachine() );
 
   QwtPlotPicker *d_picker2 = new QwtPlotPicker(
-      QwtPlot::xBottom, QwtPlot::yLeft, // ассоциация с осями
-      QwtPlotPicker::CrossRubberBand, // стиль перпендикулярных линий
-      QwtPicker::ActiveOnly, // включение/выключение
-      ui->qwtPlot_reference_signal->canvas() ); // ассоциация с полем
+      QwtPlot::xBottom, QwtPlot::yLeft,
+      QwtPlotPicker::CrossRubberBand,
+      QwtPicker::ActiveOnly,
+      ui->qwtPlot_reference_signal->canvas() );
   d_picker2->setRubberBandPen( QColor( Qt::red ) );
   d_picker2->setTrackerPen( QColor( Qt::black ) );
   d_picker2->setStateMachine( new QwtPickerDragPointMachine() );
@@ -163,6 +162,7 @@ void MainWindow::updateval()
       ui->qwtPlot_reference_r->replot();
       ui->qwtPlot_reference_signal->replot();
     }
+  ui->progresslcdNumber->display(progressframes);
   progressframes++;
   if (numberframes<=progressframes)
     {
@@ -173,16 +173,17 @@ void MainWindow::updateval()
       ui->dir_button->setEnabled(true);
       outputfile.close();
       free((void *)X);
-//      fclose(file);
     }
 }
 
 void MainWindow::on_start_botton_clicked()
 {
   QString filename = dirname;
-  filename.append(QDateTime::currentDateTime().toString("/dd-MM-yyyy_HH-mm-ss"));
+  filename.append(QString::fromStdString("/"));
+  filename.append(ui->prename->text());
+  filename.append(QDateTime::currentDateTime().toString("_dd-MM-yyyy_HH-mm-ss"));
   filename.append(QString::fromStdString(".dat"));
-//  qDebug() << filename;
+//   qDebug() << filename;
   outputfile.setFileName(filename);
   if(!outputfile.open(QIODevice::WriteOnly))
     {
@@ -195,10 +196,10 @@ void MainWindow::on_start_botton_clicked()
 
       outputfile.write("n\treference\tsignal\tR\n");
       ui->textBrowser->clear();
-      ui->textBrowser->insertPlainText(QString::fromStdString("number reference signal R\n"));
+      ui->textBrowser->insertPlainText(QString::fromStdString("N  Ref  Sig  R\n"));
       period = (int)((ui->period_value->value())*1000);
       tmr->setInterval(period);
-      tmr->start(); // Запускаем таймер
+      tmr->start();
       progressframes = 0;
       numberframes = ui->lineEdit->text().toInt();
       ui->start_botton->setEnabled(false);

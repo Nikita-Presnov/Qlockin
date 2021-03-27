@@ -1,8 +1,8 @@
 #include "lockin.h"
 #include <termios.h>
-#include <unistd.h>  /* Объявления стандартных функций UNIX */
-#include <fcntl.h>   /* Объявления управления файлами */
-#include <errno.h>   /* Объявления кодов ошибок */
+#include <unistd.h>
+#include <fcntl.h> 
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,30 +16,27 @@ bool screach_lockin(char *idn, char *locname)
 //  }
   char idns[6] = {'*','I','D','N','?','\r'};
   char outx[6] = {'O','U','T','X','0','\r'};
-  char comname[] = "/dev/ttyUSB0";/*{'/','d','e','v','/','t','t','y','U','S','B','0'};*/
-//  comname[11]=0;
+  char comname[] = "/dev/ttyUSB0";
   char buff[64];
   int F_ID, number = 11;
   for(int i=0; i<10; i++)
   {
     F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
     if(F_ID == -1);
-//       printf("%s is not correct port\n", comname);
     else{
-      struct termios options; /*структура для установки порта*/
-      tcgetattr(F_ID, &options); /*читает пораметры порта*/
-      cfsetispeed(&options, B9600); /*установка скорости порта*/
-      cfsetospeed(&options, B9600); /*установка скорости порта*/
-      options.c_cc[VTIME]    = 20; /*Время ожидания байта 20*0.1 = 2 секунды */
-      options.c_cc[VMIN]     = 0; /*минимальное число байт для чтения*/
+      struct termios options; 
+      tcgetattr(F_ID, &options); 
+      cfsetispeed(&options, B9600);
+      options.c_cc[VTIME]    = 20;
+      options.c_cc[VMIN]     = 0;
 
-      options.c_cflag &= ~PARENB; /*бит четности не используется*/
-      options.c_cflag &= ~CSTOPB; /*1 стоп бит */
-      options.c_cflag &= ~CSIZE;  /*Размер байта*/
-      options.c_cflag |= CS8;  /*8 бит*/
+      options.c_cflag &= ~PARENB;
+      options.c_cflag &= ~CSTOPB;
+      options.c_cflag &= ~CSIZE;
+      options.c_cflag |= CS8;
 
       options.c_lflag = 0;
-      options.c_oflag &= ~OPOST; /*Обязательно отключить постобработку*/
+      options.c_oflag &= ~OPOST;
 
       options.c_iflag = 0;
       options.c_iflag &= ~ (INLCR | IGNCR | ICRNL);
@@ -78,8 +75,6 @@ bool screach_lockin(char *idn, char *locname)
 //      comname[number-1]++;
 //    }
   }
-
-//  printf("No locins with this id\n");
   return false;
 }
 
@@ -91,23 +86,21 @@ bool lockin::init(char *comname)
   F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
   if(F_ID == -1)
     {
-//       printf("connection lost\n");
       return false;
     }
-  struct termios options; /*структура для установки порта*/
-  tcgetattr(F_ID, &options); /*читает пораметры порта*/
-  cfsetispeed(&options, B9600); /*установка скорости порта*/
-  cfsetospeed(&options, B9600); /*установка скорости порта*/
-  options.c_cc[VTIME]    = 20; /*Время ожидания байта 20*0.1 = 2 секунды */
-  options.c_cc[VMIN]     = 0; /*минимальное число байт для чтения*/
+  struct termios options; 
+  tcgetattr(F_ID, &options); 
+  cfsetispeed(&options, B9600);
+  options.c_cc[VTIME]    = 20; 
+  options.c_cc[VMIN]     = 0;
 
-  options.c_cflag &= ~PARENB; /*бит четности не используется*/
-  options.c_cflag &= ~CSTOPB; /*1 стоп бит */
-  options.c_cflag &= ~CSIZE;  /*Размер байта*/
-  options.c_cflag |= CS8;  /*8 бит*/
+  options.c_cflag &= ~PARENB;
+  options.c_cflag &= ~CSTOPB;
+  options.c_cflag &= ~CSIZE;
+  options.c_cflag |= CS8;
 
   options.c_lflag = 0;
-  options.c_oflag &= ~OPOST; /*Обязательно отключить постобработку*/
+  options.c_oflag &= ~OPOST;
 
   options.c_iflag = 0;
   options.c_iflag &= ~ (INLCR | IGNCR | ICRNL);
@@ -120,14 +113,13 @@ int lockin::send_command(char *command)
   return write(F_ID, command, strlen(command));
 }
 
-bool lockin::get_data()//char *command)
+bool lockin::get_data()
 {
-//  int n = write(F_ID, command, strlen(command));
   int i=0;
   bool f=true;
   int n = read(F_ID, &data[i], 1);
-//  printf("%i\n", n);
-  if(n == 0)
+//   printf("%i\n", n);
+  if(n == -1)
     return false;
   i++;
   for (;i<20;i++)

@@ -179,8 +179,9 @@ void MainWindow::updateval()
 void MainWindow::on_start_botton_clicked()
 {
     QString filename = dirname;
-    filename.append(QDateTime::currentDateTime().toString("/dd-MM-yyyy_HH-mm-ss_"));
+    filename.append(QString::fromStdString("/"));
     filename.append(ui->prename->text());
+    filename.append(QDateTime::currentDateTime().toString("_dd-MM-yyyy_HH-mm-ss"));
     filename.append(QString::fromStdString(".dat"));
 //   qDebug() << filename;
     outputfile.setFileName(filename);

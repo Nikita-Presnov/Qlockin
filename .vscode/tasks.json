@@ -8,27 +8,28 @@
             "type": "shell",
             "command": "qmake CONFIG+=debug && make -j8",
             "group": {
-				"kind": "build",
-				"isDefault": true,
-			}
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "release",
             "type": "shell",
             "command": "qmake && make -j8",
             "group": {
-				"kind": "build",
-				"isDefault": true,
-			}
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "clean",
             "type": "shell",
             "command": "make clean",
             "group": {
-				"kind": "build",
-				"isDefault": true,
-			}
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }

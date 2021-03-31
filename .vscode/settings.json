@@ -1,4 +1,9 @@
 {
     "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false
+    "telemetry.enableTelemetry": false,
+    "disasexpl.associations": {
+    
+        "**/*.c": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S",
+        "**/*.cpp": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S"
+    }
 }

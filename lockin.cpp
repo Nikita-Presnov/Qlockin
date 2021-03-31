@@ -7,6 +7,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*!
+ * @brief Search SR830 with the given ID and write the name of its copy-port in locname.
+ * @param idn: lock-in ID.
+ * @param locname: string to write lock-in COM port.
+ * @return Screach status.
+ */
 bool screach_lockin(char *idn, char *locname)
 {
     //  if(strlen(locname)!=12)
@@ -82,6 +88,13 @@ bool screach_lockin(char *idn, char *locname)
 lockin::lockin()
 {
 }
+
+/*!
+ * @brief Opening of the com port.
+ *        Use it after screach_lockin().
+ * @param comname: string with locin comport.
+ * @return Status of connection.
+ */
 bool lockin::init(char *comname)
 {
     F_ID = open(comname, O_RDWR | O_NOCTTY);// | O_NONBLOCK);
@@ -109,19 +122,32 @@ bool lockin::init(char *comname)
     return true;
 }
 
+/*!
+ * @brief Sending a command to the SR830. 
+ *        Returns the number of bytes sent if sending was successful.
+ * @param command: string with command to sending. Send OUTR?1\\r to get data from first display.
+ * @return Number of bytes sent . If -1, then sending failed.
+ */
 int lockin::send_command(char *command)
 {
     return write(F_ID, command, strlen(command));
 }
 
+/*!
+ * Reading data from a buffer into lockin::data.
+ * @return Is data read? true or false.
+ */
 bool lockin::get_data()
 {
     int i=0;
     bool f=true;
     int n = read(F_ID, &data[i], 1);
-    //   printf("%i\n", n);
+    // printf("%i\n", n);
     if(n == -1)
+    {
+        close(F_ID);
         return false;
+    }
     i++;
     for (;i<20;i++)
     {
@@ -141,4 +167,9 @@ bool lockin::get_data()
         }
     }
     return true;
+}
+
+void lockin::close_lockin()
+{
+    close(F_ID);
 }

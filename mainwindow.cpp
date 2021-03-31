@@ -105,13 +105,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-//  delete loc1;
-//  delete loc2;
-//  delete tmr;
-//  delete cruve_reference_r;
-//  delete cruve_reference_signal;
-//  delete grid1;
-//  delete grid2;
+    loc1->close_lockin();
+    loc2->close_lockin();
+    // delete loc1;
+    // delete loc2;
+    // delete tmr;
+    // delete cruve_reference_r;
+    // delete cruve_reference_signal;
+    // delete grid1;
+    // delete grid2;
     delete ui;
 }
 
@@ -234,7 +236,8 @@ void MainWindow::on_rescan_button_clicked()
 
     char name1[PORT_NAME_LEN];
     char name2[PORT_NAME_LEN];
-
+    loc1->close_lockin();
+    loc2->close_lockin();
     screach_lockin(idn1, name1);
     screach_lockin(idn2, name2);
 

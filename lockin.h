@@ -11,6 +11,7 @@ public:
   bool init(char *comname);
   bool get_data();//char *command);
   int send_command(char *command);
+  void close_lockin();
   int F_ID;
   char data[20];
 };

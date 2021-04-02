@@ -142,28 +142,46 @@ void MainWindow::updateval()
     QString qdata2 = QString(loc2->data);
     X[progressframes] = qdata1.toDouble()*1000;
     Y1[progressframes] = qdata2.toDouble()*1000;
+
+    ui->textBrowser->insertPlainText(QString::number(progressframes));
+    outdata << progressframes << '\t';
+    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+    ui->textBrowser->insertPlainText(QString::number(X[progressframes], 'g', 3));
+    outdata << X[progressframes] << '\t';
+    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+    ui->textBrowser->insertPlainText(QString::number(Y1[progressframes], 'g', 3));
+    outdata << Y1[progressframes] << '\t';
+    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
     if(X[progressframes]!=0)
     {
         Y2[progressframes] = Y1[progressframes]/X[progressframes];
-        ui->textBrowser->insertPlainText(QString::number(progressframes));
-        ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-        ui->textBrowser->insertPlainText(QString::number(X[progressframes], 'g', 3));
-        ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-        ui->textBrowser->insertPlainText(QString::number(Y1[progressframes], 'g', 3));
-        ui->textBrowser->insertPlainText(QString::fromStdString(" "));
         ui->textBrowser->insertPlainText(QString::number(Y2[progressframes], 'g', 3));
-        ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
-        ui->textBrowser->moveCursor(QTextCursor::End);
-        outdata << progressframes << '\t';
-        outdata << X[progressframes] << '\t';
-        outdata << Y1[progressframes] << '\t';
         outdata << Y2[progressframes] << '\n';
-
-        cruve_reference_r->setSamples(X,Y2,progressframes);
-        cruve_reference_signal->setSamples(X,Y1,progressframes);
-        ui->qwtPlot_reference_r->replot();
-        ui->qwtPlot_reference_signal->replot();
     }
+    else
+    {
+        // Y2[progressframes] = Y1[progressframes]/X[progressframes];
+        if (progressframes!=0)
+        {
+            Y2[progressframes] = Y2[progressframes-1];
+        }
+        else
+        {
+            Y2[progressframes]=0;
+        }
+        ui->textBrowser->insertPlainText(QString::fromStdString("inf"));
+        outdata << "inf" << '\n';
+    }
+    ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
+    ui->textBrowser->moveCursor(QTextCursor::End);
+    
+    
+
+    cruve_reference_r->setSamples(X, Y2, progressframes);
+    cruve_reference_signal->setSamples(X, Y1, progressframes);
+    ui->qwtPlot_reference_r->replot();
+    ui->qwtPlot_reference_signal->replot();
+
     ui->progresslcdNumber->display(progressframes);
     progressframes++;
     if (numberframes<=progressframes)

@@ -5,5 +5,8 @@
     
         "**/*.c": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S",
         "**/*.cpp": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S"
-    }
+    },
+    "lldb.displayFormat": "auto",
+    "lldb.showDisassembly": "always",
+    "lldb.dereferencePointers": true
 }

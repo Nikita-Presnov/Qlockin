@@ -5,8 +5,8 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "release",
             "type": "cppdbg",
+            "name": "release",
             "request": "launch",
             "program": "${workspaceFolder}/build/release/Qlockin",
             "args": [],
@@ -25,8 +25,8 @@
             "preLaunchTask": "release"
         },
         {
-            "name": "debug",
             "type": "cppdbg",
+            "name": "debug cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/debug/Qlockin",
             "args": [],
@@ -42,6 +42,16 @@
                     "ignoreFailures": true
                 }
             ],
+            "preLaunchTask": "debug"
+        },
+        {
+            "type": "lldb",
+            "name": "debug lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/debug/Qlockin",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "console": "integratedTerminal",
             "preLaunchTask": "debug"
         }
     ]

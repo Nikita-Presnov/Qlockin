@@ -45,6 +45,7 @@ private:
     double *X;
     double *Y1;
     double *Y2;
+    double *Timeval;
     // timespec time;
     // timespec starttime;
     QFile outputfile;

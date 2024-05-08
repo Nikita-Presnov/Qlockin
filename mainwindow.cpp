@@ -151,6 +151,7 @@ void MainWindow::updateval()
 
     QString qdata1 = QString(loc1->data);
     QString qdata2 = QString(loc2->data);
+    Timeval[progressframes] = timenow;
     X[progressframes] = qdata1.toDouble()*1000;
     Y1[progressframes] = qdata2.toDouble()*1000;
 
@@ -238,9 +239,11 @@ void MainWindow::on_start_botton_clicked()
         ui->start_botton->setEnabled(false);
         ui->stop_botton->setEnabled(true);
         ui->dir_button->setEnabled(false);
-        X = (double *)malloc((3*numberframes)*sizeof(double));
-        Y1 = X + numberframes;
+        X = (double *)malloc((4*numberframes)*sizeof(double));
+        Timeval = X + numberframes;
+        Y1 = Timeval + numberframes;
         Y2 = Y1 + numberframes;
+
     }
 }
 

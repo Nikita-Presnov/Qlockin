@@ -12,7 +12,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_plot_picker.h>
 #include <qwt_symbol.h>
-
+// #include <time.h>
 
 #include "lockin.h"
 
@@ -45,6 +45,8 @@ private:
     double *X;
     double *Y1;
     double *Y2;
+    // timespec time;
+    // timespec starttime;
     QFile outputfile;
     QString dirname;
     int numberframes = 0;

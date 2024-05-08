@@ -28,7 +28,7 @@
             "type": "cppdbg",
             "name": "debug",
             "request": "launch",
-            "program": "${workspaceFolder}/build/debug/qlockin",
+            "program": "${workspaceFolder}/build/qlockin",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",

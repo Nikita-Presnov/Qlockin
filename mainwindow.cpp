@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <qwt_picker_machine.h>
 #include <malloc.h>
+#include <time.h>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -122,6 +123,14 @@ void MainWindow::updateval()
     char outr[7] = {'O','U','T','R','?','1','\r'};
     loc1->send_command(outr);
     loc2->send_command(outr);
+    #define BILLION  1000000000.0
+    timespec meshtime;
+    timespec starttime;
+    if (progressframes==0)
+    {
+        clock_gettime(CLOCK_MONOTONIC_RAW, &starttime);
+    }
+    
     if(!loc1->get_data())
     {
         QMessageBox msbox;
@@ -136,6 +145,8 @@ void MainWindow::updateval()
         msbox.exec();
         progressframes = numberframes;
     }
+    clock_gettime(CLOCK_MONOTONIC_RAW, &meshtime);
+    double timenow = (meshtime.tv_sec - starttime.tv_sec) + (meshtime.tv_nsec - starttime.tv_nsec) / BILLION;
     QTextStream outdata (&outputfile);
 
     QString qdata1 = QString(loc1->data);
@@ -145,6 +156,9 @@ void MainWindow::updateval()
 
     ui->textBrowser->insertPlainText(QString::number(progressframes));
     outdata << progressframes << '\t';
+    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+    ui->textBrowser->insertPlainText(QString::number(timenow, 'g', 3));
+    outdata << timenow << '\t';
     ui->textBrowser->insertPlainText(QString::fromStdString(" "));
     ui->textBrowser->insertPlainText(QString::number(X[progressframes], 'g', 3));
     outdata << X[progressframes] << '\t';
@@ -213,9 +227,9 @@ void MainWindow::on_start_botton_clicked()
     }
     else
     {
-        outputfile.write("n\treference\tsignal\tR\n");
+        outputfile.write("n\ttime\treference\tsignal\tR\n");
         ui->textBrowser->clear();
-        ui->textBrowser->insertPlainText(QString::fromStdString("N  Ref  Sig  R\n"));
+        ui->textBrowser->insertPlainText(QString::fromStdString("N t Ref  Sig  R\n"));
         period = (int)((ui->period_value->value())*1000);
         tmr->setInterval(period);
         tmr->start();

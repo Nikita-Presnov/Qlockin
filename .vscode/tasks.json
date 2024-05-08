@@ -4,37 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "debug",
-            "detail": "Build project with debug otions.",
-            "type": "shell",
-            "command": "qmake CONFIG+=debug && make -j8",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "release",
-            "detail": "Build project.",
-            "type": "shell",
-            "command": "qmake && make -j8",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "make clean",
-            "detail": "Remove only files from last debug or release task.",
-            "type": "shell",
-            "command": "make clean",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "clean all binaries",
             "detail": "Remove all build folder.",
             "type": "shell",
@@ -44,6 +13,28 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "type": "cmake",
+            "label": "cmakeDebugType",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "build",
+            "options": {
+            }
+        },
+        {
+            "type": "cmake",
+            "label": "cmakeReleaseType",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "command": "build",
+            "options": {
+            }
         }
     ]
 }

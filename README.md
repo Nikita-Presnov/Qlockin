@@ -23,5 +23,14 @@ mkdir build
 cd build
 cmake ..
 make -jN
-./qlockin
+```
+## Обновление 
+```bash
+ssh laborant@***.***.*.**
+cd Qlockin
+git pull
+mkdir build
+cd build
+cmake ..
+make -jN
 ```

@@ -152,7 +152,7 @@ void MainWindow::updateval()
     QString qdata1 = QString(loc1->data);
     QString qdata2 = QString(loc2->data);
     Timeval[progressframes] = timenow;
-    printf("%f\n", timenow);
+    // printf("%f\n", timenow);
     X[progressframes] = qdata1.toDouble()*1000;
     Y1[progressframes] = qdata2.toDouble()*1000;
 

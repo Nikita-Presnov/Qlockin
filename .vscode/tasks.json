@@ -24,6 +24,7 @@
             "command": "build",
             "problemMatcher":"$gcc",
             "options": {
+                "cwd": "${workspaceFolder}/build_debug"
             }
         },
         {
@@ -36,6 +37,7 @@
             "command": "build",
             "problemMatcher":"$gcc",
             "options": {
+                "cwd": "${workspaceFolder}/build_release"
             }
         }
     ]

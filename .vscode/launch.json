@@ -8,7 +8,7 @@
             "type": "cppdbg",
             "name": "release",
             "request": "launch",
-            "program": "${workspaceFolder}/build/release/qlockin",
+            "program": "${workspaceFolder}/build/qlockin",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",

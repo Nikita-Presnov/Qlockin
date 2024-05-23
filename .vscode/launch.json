@@ -28,10 +28,10 @@
             "type": "cppdbg",
             "name": "debug",
             "request": "launch",
-            "program": "${workspaceFolder}/build/qlockin",
+            "program": "${workspaceFolder}/build_debug/qlockin",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build",
+            "cwd": "${workspaceFolder}/build_debug",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -42,7 +42,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "cmakeDebugType"
+            "preLaunchTask": "Debug"
         }
     ]
 }

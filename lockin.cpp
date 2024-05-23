@@ -109,7 +109,7 @@ bool lockin::init(char *comname)
     struct termios options;
     tcgetattr(F_ID, &options);
     cfsetispeed(&options, B9600);
-    options.c_cc[VTIME] = 20;
+    options.c_cc[VTIME] = 1;
     options.c_cc[VMIN] = 0;
 
     options.c_cflag &= ~PARENB;
@@ -143,33 +143,46 @@ int lockin::send_command(char *command)
  */
 bool lockin::get_data()
 {
-    int i = 0;
-    bool f = true;
-    int n = read(F_ID, &data[i], 1);
+    int n = read(F_ID, &data[0], 10);
     // printf("%i\n", n);
     if (n == -1)
     {
         close(F_ID);
         return false;
     }
-    i++;
-    for (; i < 20; i++)
+    // i++;
+    // for (; i < 20; i++)
+    // {
+    //     if (data[i - 1] != 13 && f) // && n != 0)
+    //     {
+    //         n = read(F_ID, &data[i], 1);
+    //     }
+    //     else if (data[i - 1] == 13) // find '\r'
+    //     {
+    //         data[i] = 0;
+    //         data[i - 1] = 0;
+    //         f = false;
+    //     }
+    //     else
+    //     {
+    //         data[i] = 0;
+    //     }
+    // }
+    bool f = true;
+    for (int i = 0; i < 20; i++)
     {
-        if (data[i - 1] != 13 && f && n != 0)
+        if (data[i] == '\r')
         {
-            n = read(F_ID, &data[i], 1);
-        }
-        else if (data[i - 1] == 13) // find '\r'
-        {
-            data[i] = 0;
-            data[i - 1] = 0;
             f = false;
         }
-        else
+        if (!f)
         {
             data[i] = 0;
         }
+        
+        
     }
+    
     return true;
 }
 

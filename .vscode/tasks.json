@@ -26,33 +26,34 @@
             "options": {
                 "cwd": "${workspaceFolder}/build_debug"
             }
-        },
-        {
-            "type": "cmake",
-            "label": "cmakeDebugType",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "command": "build",
-            "problemMatcher":"$gcc",
-            "options": {
-                "cwd": "${workspaceFolder}/build_debug"
-            }
-        },
-        {
-            "type": "cmake",
-            "label": "cmakeReleaseType",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "command": "build",
-            "problemMatcher":"$gcc",
-            "options": {
-                "cwd": "${workspaceFolder}/build_release"
-            }
-            
         }
+        // },
+        // {
+        //     "type": "cmake",
+        //     "label": "cmakeDebugType",
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "command": "build",
+        //     "problemMatcher":"$gcc",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/build_debug"
+        //     }
+        // },
+        // {
+        //     "type": "cmake",
+        //     "label": "cmakeReleaseType",
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "command": "build",
+        //     "problemMatcher":"$gcc",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/build_release"
+        //     }
+            
+        // }
     ]
 }

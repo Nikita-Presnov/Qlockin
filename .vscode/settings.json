@@ -8,5 +8,19 @@
     },
     "lldb.displayFormat": "auto",
     "lldb.showDisassembly": "always",
-    "lldb.dereferencePointers": true
+    "lldb.dereferencePointers": true,
+    "files.associations": {
+        "*.py": "python",
+        "*.ld": "linkerscript",
+        "*.tcc": "cpp",
+        "string": "cpp",
+        "functional": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "tuple": "cpp"
+    }
 }

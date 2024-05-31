@@ -16,7 +16,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     char idn2[] = IDN2; //{'7','0','2','5','9'};
     char idn1[] = IDN1; //{'8','1','5','9','5'};
     ui->setupUi(this);
-    ui->textBrowser->setReadOnly(true);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    // QStandardItemModel* model=  new QStandardItemModel(0, 4);
+    // model->setHeaderData(0, Qt::Horizontal, "Time");
+    // model->setHeaderData(0, Qt::Horizontal, "reference");
+    // model->setHeaderData(0, Qt::Horizontal, "signal");
+    // model->setHeaderData(0, Qt::Horizontal, "R");
     ui->stop_botton->setEnabled(false);
     tmr = new QTimer(this);
     connect(tmr, SIGNAL(timeout()), this, SLOT(updateval()));
@@ -170,42 +176,46 @@ void MainWindow::updateval()
     X[progressframes] = qdata1.toDouble() * 1000;
     Y1[progressframes] = qdata2.toDouble() * 1000;
 
-    ui->textBrowser->insertPlainText(QString::number(progressframes));
+    // ui->textBrowser->insertPlainText(QString::number(progressframes));
+    ui->tableWidget->insertRow(progressframes);
+    ui->tableWidget->setItem(progressframes, 0, new QTableWidgetItem());
+    ui->tableWidget->setItem(progressframes, 1, new QTableWidgetItem());
+    ui->tableWidget->setItem(progressframes, 2, new QTableWidgetItem());
+    ui->tableWidget->setItem(progressframes, 3, new QTableWidgetItem());
     outdata << progressframes << '\t';
 #ifdef ENABLE_TIME
-    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-    ui->textBrowser->insertPlainText(QString::number(timenow, 'g', 3));
+    // ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+    // ui->textBrowser->insertPlainText(QString::number(timenow, 'g', 3));
+    // ui->tableWidget->setCurrentCell(progressframes, 1);
+    ui->tableWidget->item(progressframes, 0)->setText(QString::number(timenow, 'g', 3));
     outdata << timenow << '\t';
 #endif
-    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-    ui->textBrowser->insertPlainText(QString::number(X[progressframes], 'g', 3));
-    outdata << X[progressframes] << '\t';
-    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-    ui->textBrowser->insertPlainText(QString::number(Y1[progressframes], 'g', 3));
-    outdata << Y1[progressframes] << '\t';
-    ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-    if (X[progressframes] != 0)
-    {
-        Y2[progressframes] = Y1[progressframes] / X[progressframes];
-        ui->textBrowser->insertPlainText(QString::number(Y2[progressframes], 'g', 3));
-        outdata << Y2[progressframes] << '\n';
-    }
-    else
-    {
-        // Y2[progressframes] = Y1[progressframes]/X[progressframes];
-        if (progressframes != 0)
+        // ui->textBrowser->insertPlainText(QString::fromStdString(" "));
+        ui->tableWidget->item(progressframes, 1)->setText(QString::number(X[progressframes], 'g', 3));
+        outdata << X[progressframes] << '\t';
+        ui->tableWidget->item(progressframes, 2)->setText(QString::number(Y1[progressframes], 'g', 3));
+        outdata << Y1[progressframes] << '\t';
+        if (X[progressframes] != 0)
         {
-            Y2[progressframes] = Y2[progressframes - 1];
+            Y2[progressframes] = Y1[progressframes] / X[progressframes];
+            ui->tableWidget->item(progressframes, 3)->setText(QString::number(Y2[progressframes], 'g', 3));
+            outdata << Y2[progressframes] << '\n';
         }
         else
         {
-            Y2[progressframes] = 0;
+            // Y2[progressframes] = Y1[progressframes]/X[progressframes];
+            if (progressframes != 0)
+            {
+                Y2[progressframes] = Y2[progressframes - 1];
+            }
+            else
+            {
+                Y2[progressframes] = 0;
+            }
+            ui->tableWidget->item(progressframes, 3)->setText(QString::fromStdString("inf"));
+            outdata << "inf" << '\n';
         }
-        ui->textBrowser->insertPlainText(QString::fromStdString("inf"));
-        outdata << "inf" << '\n';
-    }
-    ui->textBrowser->insertPlainText(QString::fromStdString("\n"));
-    ui->textBrowser->moveCursor(QTextCursor::End);
+    ui->tableWidget->setCurrentCell(progressframes, 0);
 
     cruve_reference_r->setSamples(X, Y2, progressframes);
     cruve_reference_signal->setSamples(X, Y1, progressframes);
@@ -232,7 +242,7 @@ void MainWindow::on_start_botton_clicked()
     filename.append(QString::fromStdString("/"));
     filename.append(ui->prename->text());
     filename.append(QDateTime::currentDateTime().toString("_dd-MM-yyyy_HH-mm-ss"));
-    filename.append(QString::fromStdString(".dat"));
+    filename.append(QString::fromStdString(".csv"));
     //   qDebug() << filename;
     outputfile.setFileName(filename);
     if (!outputfile.open(QIODevice::WriteOnly))
@@ -244,12 +254,17 @@ void MainWindow::on_start_botton_clicked()
     else
     {
         outputfile.write("n\ttime\treference\tsignal\tR\n");
-        ui->textBrowser->clear();
-#ifdef ENABLE_TIME
-        ui->textBrowser->insertPlainText(QString::fromStdString("N t Ref  Sig  R\n"));
-#else
-        ui->textBrowser->insertPlainText(QString::fromStdString("N Ref  Sig  R\n"));
-#endif
+        // ui->tableWidget->clearContents();
+        while (ui->tableWidget->rowCount() > 0)
+        {
+            ui->tableWidget->removeRow(0);
+        }
+
+        // #ifdef ENABLE_TIME
+        //         ui->textBrowser->insertPlainText(QString::fromStdString("N t Ref  Sig  R\n"));
+        // #else
+        //         ui->textBrowser->insertPlainText(QString::fromStdString("N Ref  Sig  R\n"));
+        // #endif
         period = (int)((ui->period_value->value()) * 1000);
         tmr->setInterval(period);
         tmr->start();

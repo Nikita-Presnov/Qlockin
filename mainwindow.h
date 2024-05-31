@@ -12,6 +12,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_plot_picker.h>
 #include <qwt_symbol.h>
+#include <QStandardItemModel>
 // #include <time.h>
 
 #include "lockin.h"
@@ -42,6 +43,7 @@ private:
     QwtPlotCurve *cruve_reference_signal;
     QwtPlotGrid *grid1;
     QwtPlotGrid *grid2;
+    // QStandardItemModel* model;
     double *X;
     double *Y1;
     double *Y2;

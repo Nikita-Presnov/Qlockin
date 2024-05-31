@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>954</width>
+    <width>1037</width>
     <height>544</height>
    </rect>
   </property>
@@ -15,6 +15,25 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
+    <item row="3" column="1">
+     <widget class="QwtPlot" name="qwtPlot_reference_signal">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="canvasBackground">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="2">
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="1">
@@ -72,6 +91,19 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="8">
+       <widget class="QPushButton" name="start_botton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="2">
        <widget class="QLabel" name="label_2">
         <property name="sizePolicy">
@@ -95,7 +127,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="8">
+      <item row="1" column="9">
        <widget class="QPushButton" name="stop_botton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -115,7 +147,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="5">
+      <item row="1" column="6">
        <widget class="QPushButton" name="dir_button">
         <property name="text">
          <string>Open Derictory</string>
@@ -125,7 +157,7 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="numer_frame">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -135,14 +167,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="6">
+      <item row="1" column="7">
        <widget class="QPushButton" name="rescan_button">
         <property name="text">
          <string>Rescan lockins</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
+      <item row="0" column="5">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -168,22 +200,33 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="7">
-       <widget class="QPushButton" name="start_botton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item row="1" column="4">
+       <widget class="QComboBox" name="comboBox">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
+        <item>
+         <property name="text">
+          <string>R</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Nolinar</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Start</string>
+         <string>Disp mode</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="1" column="0" rowspan="2">
+    <item row="1" column="0" rowspan="3">
      <widget class="QTableWidget" name="tableWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -250,27 +293,8 @@
       </column>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QwtPlot" name="qwtPlot_reference_r">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="canvasBackground">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>255</red>
-         <green>255</green>
-         <blue>255</blue>
-        </color>
-       </brush>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="1">
-     <widget class="QwtPlot" name="qwtPlot_reference_signal">
+     <widget class="QwtPlot" name="qwtPlot_reference_r">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>

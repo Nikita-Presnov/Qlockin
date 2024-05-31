@@ -1,4 +1,4 @@
-#define OFFLINE_DEBUG 1
+// #define OFFLINE_DEBUG 0
 #define ENABLE_TIME 1
 
 #include "mainwindow.h"
@@ -176,7 +176,6 @@ void MainWindow::updateval()
     X[progressframes] = qdata1.toDouble() * 1000;
     Y1[progressframes] = qdata2.toDouble() * 1000;
 
-    // ui->textBrowser->insertPlainText(QString::number(progressframes));
     ui->tableWidget->insertRow(progressframes);
     ui->tableWidget->setItem(progressframes, 0, new QTableWidgetItem());
     ui->tableWidget->setItem(progressframes, 1, new QTableWidgetItem());
@@ -184,13 +183,9 @@ void MainWindow::updateval()
     ui->tableWidget->setItem(progressframes, 3, new QTableWidgetItem());
     outdata << progressframes << '\t';
 #ifdef ENABLE_TIME
-    // ui->textBrowser->insertPlainText(QString::fromStdString(" "));
-    // ui->textBrowser->insertPlainText(QString::number(timenow, 'g', 3));
-    // ui->tableWidget->setCurrentCell(progressframes, 1);
     ui->tableWidget->item(progressframes, 0)->setText(QString::number(timenow, 'g', 3));
     outdata << timenow << '\t';
 #endif
-        // ui->textBrowser->insertPlainText(QString::fromStdString(" "));
         ui->tableWidget->item(progressframes, 1)->setText(QString::number(X[progressframes], 'g', 3));
         outdata << X[progressframes] << '\t';
         ui->tableWidget->item(progressframes, 2)->setText(QString::number(Y1[progressframes], 'g', 3));
@@ -203,7 +198,6 @@ void MainWindow::updateval()
         }
         else
         {
-            // Y2[progressframes] = Y1[progressframes]/X[progressframes];
             if (progressframes != 0)
             {
                 Y2[progressframes] = Y2[progressframes - 1];
@@ -254,17 +248,10 @@ void MainWindow::on_start_botton_clicked()
     else
     {
         outputfile.write("n\ttime\treference\tsignal\tR\n");
-        // ui->tableWidget->clearContents();
         while (ui->tableWidget->rowCount() > 0)
         {
             ui->tableWidget->removeRow(0);
         }
-
-        // #ifdef ENABLE_TIME
-        //         ui->textBrowser->insertPlainText(QString::fromStdString("N t Ref  Sig  R\n"));
-        // #else
-        //         ui->textBrowser->insertPlainText(QString::fromStdString("N Ref  Sig  R\n"));
-        // #endif
         period = (int)((ui->period_value->value()) * 1000);
         tmr->setInterval(period);
         tmr->start();

@@ -5,13 +5,14 @@
 #endif
 
 #ifdef __linux
-#include <termios.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
+#include <stdio.h>
+#include <unistd.h>  /* Объявления стандартных функций UNIX */
+#include <fcntl.h>   /* Объявления управления файлами */
+#include <errno.h>   /* Объявления кодов ошибок */
+#include <termios.h> /* Объявления управления POSIX-терминалом */
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
+
 /*!
  * @brief Search SR830 with the given ID and write the name of its copy-port in locname.
  * @param idn: lock-in ID.
@@ -29,7 +30,7 @@ bool screach_lockin(char *idn, char *locname)
     char outx[6] = {'O', 'U', 'T', 'X', '0', '\r'};
     char comname[] = "/dev/ttyUSB0";
     char buff[64];
-    int F_ID, number = 11;
+    int F_ID = -1, number = 11;
     for (int i = 0; i < 10; i++)
     {
         F_ID = open(comname, O_RDWR | O_NOCTTY); // | O_NONBLOCK);
@@ -56,7 +57,9 @@ bool screach_lockin(char *idn, char *locname)
 
             tcsetattr(F_ID, TCSANOW, &options);
             int n = write(F_ID, outx, 6);
+            tcdrain(F_ID);
             n = write(F_ID, idns, 6);
+            tcdrain(F_ID);
             for (int i = 0; n != 0 && i < 64; i++)
             {
                 n = read(F_ID, &buff[i], 1);
@@ -101,7 +104,7 @@ lockin::lockin()
  */
 bool lockin::init(char *comname)
 {
-    F_ID = open(comname, O_RDWR | O_NOCTTY); // | O_NONBLOCK);
+    F_ID = open(comname, O_RDWR); // | O_NOCTTY | O_NONBLOCK);
     if (F_ID == -1)
     {
         return false;
@@ -132,9 +135,11 @@ bool lockin::init(char *comname)
  * @param command: string with command to sending. Send OUTR?1\\r to get data from first display.
  * @return Number of bytes sent . If -1, then sending failed.
  */
-int lockin::send_command(char *command)
+int lockin::send_command(char *command, int comlen)
 {
-    return write(F_ID, command, strlen(command));
+    int n = write(F_ID, command, comlen);
+    tcdrain(F_ID);
+    return n;
 }
 
 /*!
@@ -145,7 +150,8 @@ bool lockin::get_data()
 {
     int i=0;
     bool f=true;
-    int n = read(F_ID, &data[i], 1);
+    char buff[20];
+    int n = read(F_ID, &buff[i], 1);
     // printf("%i\n", n);
     if(n == -1)
     {
@@ -155,21 +161,22 @@ bool lockin::get_data()
     i++;
     for (;i<20;i++)
     {
-        if(data[i-1]!=13 && f && n!=0)
+        if(buff[i-1]!=13 && f && n!=0)
         {
-            n = read(F_ID, &data[i], 1);
+            n = read(F_ID, &buff[i], 1);
         }
-        else if(data[i-1]==13)//find '\r'
+        else if(buff[i-1]==13)//find '\r'
         {
-            data[i] = 0;
-            data[i-1]=0;
+            buff[i] = 0;
+            buff[i-1]=0;
             f = false;
         }
         else
         {
-            data[i] = 0;
+            buff[i] = 0;
         }
     }
+    strcpy(data, buff);
     return true;
 }
 

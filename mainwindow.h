@@ -35,8 +35,8 @@ private:
     QTimer *tmr;
     lockin *loc1;
     lockin *loc2;
-    //  QSerialPort *locin1;
-    //  QSerialPort *locin2;
+    // QSerialPort *locin1;
+    // QSerialPort *locin2;
     QwtPlotPicker *d_picker1;
     QwtPlotPicker *d_picker2;
     QwtPlotCurve *cruve_reference_r;

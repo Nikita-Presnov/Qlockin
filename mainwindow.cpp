@@ -131,7 +131,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateval()
 {
-    char outr[7] = {'O', 'U', 'T', 'R', '?', '1', '\r'};
+    char outr[7] = {'O', 'U', 'T', 'P', '?', '1', '\r'};
 
 #ifdef ENABLE_TIME
 #define BILLION 1000000000.0
@@ -144,8 +144,8 @@ void MainWindow::updateval()
 #endif
 
 #ifndef OFFLINE_DEBUG
-    loc1->send_command(outr);
-    loc2->send_command(outr);
+    loc1->send_command(outr, 7);
+    loc2->send_command(outr, 7);
     if (!loc1->get_data())
     {
         QMessageBox msbox;

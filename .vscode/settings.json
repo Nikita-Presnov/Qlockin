@@ -21,6 +21,7 @@
         "sstream": "cpp",
         "streambuf": "cpp",
         "string_view": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "fstream": "cpp"
     }
 }

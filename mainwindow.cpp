@@ -186,36 +186,37 @@ void MainWindow::updateval()
     ui->tableWidget->item(progressframes, 0)->setText(QString::number(timenow, 'g', 3));
     outdata << timenow << '\t';
 #endif
-        ui->tableWidget->item(progressframes, 1)->setText(QString::number(X[progressframes], 'g', 3));
-        outdata << X[progressframes] << '\t';
-        ui->tableWidget->item(progressframes, 2)->setText(QString::number(Y1[progressframes], 'g', 3));
-        outdata << Y1[progressframes] << '\t';
-        if (X[progressframes] != 0)
+    ui->tableWidget->item(progressframes, 1)->setText(QString::number(X[progressframes], 'g', 3));
+    outdata << X[progressframes] << '\t';
+    ui->tableWidget->item(progressframes, 2)->setText(QString::number(Y1[progressframes], 'g', 3));
+    outdata << Y1[progressframes] << '\t';
+    if (X[progressframes] != 0)
+    {
+        Y2[progressframes] = Y1[progressframes] / X[progressframes];
+        ui->tableWidget->item(progressframes, 3)->setText(QString::number(Y2[progressframes], 'g', 3));
+        outdata << Y2[progressframes] << '\n';
+    }
+    else
+    {
+        if (progressframes != 0)
         {
-            Y2[progressframes] = Y1[progressframes] / X[progressframes];
-            ui->tableWidget->item(progressframes, 3)->setText(QString::number(Y2[progressframes], 'g', 3));
-            outdata << Y2[progressframes] << '\n';
+            Y2[progressframes] = Y2[progressframes - 1];
         }
         else
         {
-            if (progressframes != 0)
-            {
-                Y2[progressframes] = Y2[progressframes - 1];
-            }
-            else
-            {
-                Y2[progressframes] = 0;
-            }
-            ui->tableWidget->item(progressframes, 3)->setText(QString::fromStdString("inf"));
-            outdata << "inf" << '\n';
+            Y2[progressframes] = 0;
         }
+        ui->tableWidget->item(progressframes, 3)->setText(QString::fromStdString("inf"));
+        outdata << "inf" << '\n';
+    }
     ui->tableWidget->setCurrentCell(progressframes, 0);
-
-    cruve_reference_r->setSamples(X, Y2, progressframes);
-    cruve_reference_signal->setSamples(X, Y1, progressframes);
-    ui->qwtPlot_reference_r->replot();
-    ui->qwtPlot_reference_signal->replot();
-
+    if (progressframes != 0)
+    {
+        cruve_reference_r->setSamples(&X[1], &Y2[1], progressframes - 1);
+        cruve_reference_signal->setSamples(&X[1], &Y1[1], progressframes - 1);
+        ui->qwtPlot_reference_r->replot();
+        ui->qwtPlot_reference_signal->replot();
+    }
     ui->progresslcdNumber->display(progressframes);
     progressframes++;
     if (numberframes <= progressframes)

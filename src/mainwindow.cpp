@@ -10,8 +10,8 @@
 #include <malloc.h>
 #include <time.h>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
-                                          ui(new Ui::MainWindow)
+LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
+                                          ui(new Ui::LockinAPP)
 {
     char idn2[] = IDN2; //{'7','0','2','5','9'};
     char idn1[] = IDN1; //{'8','1','5','9','5'};
@@ -113,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 #endif
 }
 
-MainWindow::~MainWindow()
+LockinAPP::~LockinAPP()
 {
 #ifndef OFFLINE_DEBUG
     loc1->close_lockin();
@@ -129,7 +129,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateval()
+void LockinAPP::updateval()
 {
     char outr[7] = {'O', 'U', 'T', 'P', '?', '1', '\r'};
 
@@ -231,7 +231,7 @@ void MainWindow::updateval()
     }
 }
 
-void MainWindow::on_start_botton_clicked()
+void LockinAPP::on_start_botton_clicked()
 {
     QString filename = dirname;
     filename.append(QString::fromStdString("/"));
@@ -268,7 +268,7 @@ void MainWindow::on_start_botton_clicked()
     }
 }
 
-void MainWindow::on_stop_botton_clicked()
+void LockinAPP::on_stop_botton_clicked()
 {
     tmr->stop();
     ui->start_botton->setEnabled(true);
@@ -278,14 +278,14 @@ void MainWindow::on_stop_botton_clicked()
     outputfile.close();
 }
 
-void MainWindow::on_dir_button_clicked()
+void LockinAPP::on_dir_button_clicked()
 {
     dirname = QFileDialog::getExistingDirectory(this,
                                                 tr("Open Directory"),
                                                 "Documents");
 }
 
-void MainWindow::on_rescan_button_clicked()
+void LockinAPP::on_rescan_button_clicked()
 {
 #ifndef OFFLINE_DEBUG
     char idn2[] = IDN2; //{'7','0','2','5','9'};

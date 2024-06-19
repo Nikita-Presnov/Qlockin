@@ -18,20 +18,20 @@
 #include "lockin.h"
 
 namespace Ui {
-    class MainWindow;
+    class LockinAPP;
 }
 
-class MainWindow : public QMainWindow
+class LockinAPP : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit LockinAPP(QWidget *parent = 0);
 
-    ~MainWindow();
+    ~LockinAPP();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::LockinAPP *ui;
     QTimer *tmr;
     lockin *loc1;
     lockin *loc2;

@@ -26,6 +26,15 @@
             "options": {
                 "cwd": "${workspaceFolder}/build_debug"
             }
+        },
+        {
+            "label": "uic",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command":"uic -o src/ui_mainwindow.h mainwindow.ui "
         }
         // },
         // {

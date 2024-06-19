@@ -34,7 +34,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command":"uic -o src/ui_mainwindow.h mainwindow.ui "
+            "command":"uic -o src/ui_lockinapp.h lockinapp.ui "
         }
         // },
         // {

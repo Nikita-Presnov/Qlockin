@@ -1,14 +1,5 @@
 {
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "disasexpl.associations": {
     
-        "**/*.c": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S",
-        "**/*.cpp": "${fileDirname}/build/debug/obj/${fileBasenameNoExtension}.S"
-    },
-    "lldb.displayFormat": "auto",
-    "lldb.showDisassembly": "always",
-    "lldb.dereferencePointers": true,
     "files.associations": {
         "*.py": "python",
         "*.ld": "linkerscript",
@@ -22,6 +13,7 @@
         "streambuf": "cpp",
         "string_view": "cpp",
         "tuple": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "qapplication": "cpp"
     }
 }

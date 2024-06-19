@@ -1,8 +1,8 @@
 // #define OFFLINE_DEBUG 0
 #define ENABLE_TIME 1
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "lockinapp.h"
+#include "ui_lockinapp.h"
 #include <QFileDialog>
 #include <QTime>
 #include <QMessageBox>

@@ -1,4 +1,5 @@
 #include "lockin.h"
+#ifdef QTSERIAL
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
@@ -93,3 +94,4 @@ void lockin::close_lockin()
     // close(F_ID);
     this->serialPort->close();
 }
+#endif //QTSERIAL

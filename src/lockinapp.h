@@ -8,6 +8,7 @@
 //#include <QtSerialPort/QSerialPort>
 //#include <QtSerialPort/QSerialPortInfo>
 #include <QFile>
+#include <QThread>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_picker.h>
@@ -55,6 +56,7 @@ private:
     int numberframes = 0;
     int progressframes = 0;
     int period;
+    QThread comThread;
 
 private slots:
     void on_start_botton_clicked();

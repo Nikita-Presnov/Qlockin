@@ -14,6 +14,8 @@
         "string_view": "cpp",
         "tuple": "cpp",
         "fstream": "cpp",
-        "qapplication": "cpp"
+        "qapplication": "cpp",
+        "future": "cpp",
+        "system_error": "cpp"
     }
 }

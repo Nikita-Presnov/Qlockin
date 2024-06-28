@@ -94,6 +94,7 @@ bool screach_lockin(char *idn, char *locname)
 
 lockin::lockin()
 {
+
 }
 
 /*!
@@ -148,27 +149,27 @@ int lockin::send_command(char *command, int comlen)
  */
 bool lockin::get_data()
 {
-    int i=0;
-    bool f=true;
+    int i = 0;
+    bool f = true;
     char buff[20];
     int n = read(F_ID, &buff[i], 1);
     // printf("%i\n", n);
-    if(n == -1)
+    if (n == -1)
     {
         close(F_ID);
         return false;
     }
     i++;
-    for (;i<20;i++)
+    for (; i < 20; i++)
     {
-        if(buff[i-1]!=13 && f && n!=0)
+        if (buff[i - 1] != 13 && f && n != 0)
         {
             n = read(F_ID, &buff[i], 1);
         }
-        else if(buff[i-1]==13)//find '\r'
+        else if (buff[i - 1] == 13) // find '\r'
         {
             buff[i] = 0;
-            buff[i-1]=0;
+            buff[i - 1] = 0;
             f = false;
         }
         else

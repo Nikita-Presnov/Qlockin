@@ -19,7 +19,7 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 #   src/mainwindow.cpp
 # )
 
-file(GLOB LIBSOURSES "src/*.cpp")
+file(GLOB LIBSOURSES "lib/*.cpp")
 file(GLOB QLOCKINSRC "qlockin/*.cpp")
 file(GLOB QLOCKINLITESRC "qlockin-lite/*.cpp")
 # file(GLOB HEADERS "src/*.h")
@@ -31,5 +31,10 @@ target_include_directories(qlockin PRIVATE lib/ qlockin/)
 # Use the Widgets module from Qt 5.
 target_link_libraries(qlockin Qt5::Widgets Qwt::Qwt)
 
+add_executable(qlockin-lite ${LIBSOURSES} ${QLOCKINLITESRC})
+target_include_directories(qlockin-lite PRIVATE lib/ qlockin/)
+# Use the Widgets module from Qt 5.
+target_link_libraries(qlockin-lite Qt5::Widgets Qwt::Qwt)
+
 # Install the executable
-install(TARGETS qlockin DESTINATION bin)
+# install(TARGETS qlockin DESTINATION bin)

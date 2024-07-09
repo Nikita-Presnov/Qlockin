@@ -111,6 +111,7 @@ LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
         msbox.exec();
     }
 #endif
+    
 }
 
 LockinAPP::~LockinAPP()

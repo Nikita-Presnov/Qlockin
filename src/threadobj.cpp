@@ -1,21 +1,21 @@
 #include "lockin.h"
-threadlocin::threadlocin(QObject *parent) : QObject(parent), m_message("")
+threadlockin::threadlockin(QObject *parent) : QObject(parent), m_message("")
 {
 
 }
 
-bool threadlocin::running() const
+bool threadlockin::running() const
 {
     return m_running;
 }
  
-QString threadlocin::message() const
+QString threadlockin::message() const
 {
     return m_message;
 }
  
 // Самый важный метод, в котором будет выполняться "полезная" работа объекта
-void threadlocin::run()
+void threadlockin::run()
 {
     count = 0;
     // Переменная m_running отвечает за работу объекта в потоке.
@@ -29,7 +29,7 @@ void threadlocin::run()
     emit finished();
 }
  
-void threadlocin::setRunning(bool running)
+void threadlockin::setRunning(bool running)
 {
     if (m_running == running)
         return;
@@ -38,7 +38,7 @@ void threadlocin::setRunning(bool running)
     emit runningChanged(running);
 }
  
-void threadlocin::setMessage(QString message)
+void threadlockin::setMessage(QString message)
 {
     if (m_message == message)
         return;

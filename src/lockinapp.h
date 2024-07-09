@@ -56,7 +56,7 @@ private:
     int numberframes = 0;
     int progressframes = 0;
     int period;
-    QThread comThread;
+    QThread lockinThread;
 
 private slots:
     void on_start_botton_clicked();

@@ -19,20 +19,20 @@
 #include "lockin.h"
 
 namespace Ui {
-    class LockinAPP;
+    class LockinAPPlite;
 }
 
-class LockinAPP : public QMainWindow
+class LockinAPPlite : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit LockinAPP(QWidget *parent = 0);
+    explicit LockinAPPlite(QWidget *parent = 0);
 
-    ~LockinAPP();
+    ~LockinAPPlite();
 
 private:
-    Ui::LockinAPP *ui;
+    Ui::LockinAPPlite *ui;
     QTimer *tmr;
     lockin *loc2;
     // QSerialPort *locin1;
@@ -43,8 +43,8 @@ private:
     // QStandardItemModel* model;
     double *X;
     double *Y1;
-    double *Y2;
-    double *Timeval;
+    // double *Y2;
+    // double *Timeval;
     // timespec time;
     // timespec starttime;
     QFile outputfile;

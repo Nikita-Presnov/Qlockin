@@ -10,8 +10,8 @@
 #include <malloc.h>
 #include <time.h>
 
-LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
-                                          ui(new Ui::LockinAPP)
+LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
+                                          ui(new Ui::LockinAPPlite)
 {
     char idn2[] = IDN2; //{'7','0','2','5','9'};
     // char idn1[] = IDN1; //{'8','1','5','9','5'};
@@ -45,6 +45,7 @@ LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
     d_picker2->setTrackerPen(QColor(Qt::black));
     d_picker2->setStateMachine(new QwtPickerDragPointMachine());
 
+    cruve_reference_signal = new QwtPlotCurve();
     cruve_reference_signal->setPen(Qt::green, 3);
     QwtSymbol *symbol2 = new QwtSymbol(QwtSymbol::Ellipse,
                                        QBrush(Qt::blue),
@@ -74,7 +75,7 @@ LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
     
 }
 
-LockinAPP::~LockinAPP()
+LockinAPPlite::~LockinAPPlite()
 {
 #ifndef OFFLINE_DEBUG
     loc2->close_lockin();
@@ -82,7 +83,7 @@ LockinAPP::~LockinAPP()
     delete ui;
 }
 
-void LockinAPP::updateval()
+void LockinAPPlite::updateval()
 {
     char outr[7] = {'O', 'U', 'T', 'P', '?', '1', '\r'};
 
@@ -114,7 +115,7 @@ void LockinAPP::updateval()
 
     QString qdata2 = QString(loc2->data);
 #ifdef ENABLE_TIME
-    Timeval[progressframes] = timenow;
+    // Timeval[progressframes] = timenow;
 #endif
     // printf("%f\n", timenow);
     X[progressframes] = timenow;
@@ -150,7 +151,7 @@ void LockinAPP::updateval()
     }
 }
 
-void LockinAPP::on_start_botton_clicked()
+void LockinAPPlite::on_start_botton_clicked()
 {
     QString filename = dirname;
     filename.append(QString::fromStdString("/"));
@@ -180,14 +181,14 @@ void LockinAPP::on_start_botton_clicked()
         ui->start_botton->setEnabled(false);
         ui->stop_botton->setEnabled(true);
         ui->dir_button->setEnabled(false);
-        X = (double *)malloc((4 * numberframes) * sizeof(double));
-        Timeval = X + numberframes;
-        Y1 = Timeval + numberframes;
-        Y2 = Y1 + numberframes;
+        X = (double *)malloc((2 * numberframes) * sizeof(double));
+        // Timeval = X + numberframes;
+        Y1 = X + numberframes;
+        // Y2 = Y1 + numberframes;
     }
 }
 
-void LockinAPP::on_stop_botton_clicked()
+void LockinAPPlite::on_stop_botton_clicked()
 {
     tmr->stop();
     ui->start_botton->setEnabled(true);
@@ -197,14 +198,14 @@ void LockinAPP::on_stop_botton_clicked()
     outputfile.close();
 }
 
-void LockinAPP::on_dir_button_clicked()
+void LockinAPPlite::on_dir_button_clicked()
 {
     dirname = QFileDialog::getExistingDirectory(this,
                                                 tr("Open Directory"),
                                                 "Documents");
 }
 
-void LockinAPP::on_rescan_button_clicked()
+void LockinAPPlite::on_rescan_button_clicked()
 {
 #ifndef OFFLINE_DEBUG
     char idn2[] = IDN2; //{'7','0','2','5','9'};

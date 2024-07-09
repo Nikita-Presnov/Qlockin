@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_LockinAPP
+class Ui_LockinAPPlite
 {
 public:
     QWidget *centralWidget;
@@ -51,12 +51,12 @@ public:
     QLabel *label_4;
     QTableWidget *tableWidget;
 
-    void setupUi(QMainWindow *LockinAPP)
+    void setupUi(QMainWindow *LockinAPPlite)
     {
-        if (LockinAPP->objectName().isEmpty())
-            LockinAPP->setObjectName(QString::fromUtf8("LockinAPP"));
-        LockinAPP->resize(1037, 544);
-        centralWidget = new QWidget(LockinAPP);
+        if (LockinAPPlite->objectName().isEmpty())
+            LockinAPPlite->setObjectName(QString::fromUtf8("LockinAPPlite"));
+        LockinAPPlite->resize(1037, 544);
+        centralWidget = new QWidget(LockinAPPlite);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout_2 = new QGridLayout(centralWidget);
         gridLayout_2->setSpacing(6);
@@ -219,40 +219,40 @@ public:
 
         gridLayout_2->addWidget(tableWidget, 1, 0, 2, 1);
 
-        LockinAPP->setCentralWidget(centralWidget);
+        LockinAPPlite->setCentralWidget(centralWidget);
 
-        retranslateUi(LockinAPP);
+        retranslateUi(LockinAPPlite);
 
-        QMetaObject::connectSlotsByName(LockinAPP);
+        QMetaObject::connectSlotsByName(LockinAPPlite);
     } // setupUi
 
-    void retranslateUi(QMainWindow *LockinAPP)
+    void retranslateUi(QMainWindow *LockinAPPlite)
     {
-        LockinAPP->setWindowTitle(QCoreApplication::translate("LockinAPP", "Qlock-in", nullptr));
-        label->setText(QCoreApplication::translate("LockinAPP", "Frames", nullptr));
-        period_label->setText(QCoreApplication::translate("LockinAPP", "Period, sec", nullptr));
-        start_botton->setText(QCoreApplication::translate("LockinAPP", "Start", nullptr));
-        label_2->setText(QCoreApplication::translate("LockinAPP", "Output name", nullptr));
-        stop_botton->setText(QCoreApplication::translate("LockinAPP", "Stop", nullptr));
-        label_3->setText(QCoreApplication::translate("LockinAPP", "Number", nullptr));
-        dir_button->setText(QCoreApplication::translate("LockinAPP", "Open Derictory", nullptr));
-        numer_frame->setText(QCoreApplication::translate("LockinAPP", "2000", nullptr));
-        rescan_button->setText(QCoreApplication::translate("LockinAPP", "Rescan lockins", nullptr));
-        prename->setText(QCoreApplication::translate("LockinAPP", "test", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("LockinAPP", "R", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("LockinAPP", "Nolinar", nullptr));
+        LockinAPPlite->setWindowTitle(QCoreApplication::translate("LockinAPPlite", "Qlock-in Lite", nullptr));
+        label->setText(QCoreApplication::translate("LockinAPPlite", "Frames", nullptr));
+        period_label->setText(QCoreApplication::translate("LockinAPPlite", "Period, sec", nullptr));
+        start_botton->setText(QCoreApplication::translate("LockinAPPlite", "Start", nullptr));
+        label_2->setText(QCoreApplication::translate("LockinAPPlite", "Output name", nullptr));
+        stop_botton->setText(QCoreApplication::translate("LockinAPPlite", "Stop", nullptr));
+        label_3->setText(QCoreApplication::translate("LockinAPPlite", "Number", nullptr));
+        dir_button->setText(QCoreApplication::translate("LockinAPPlite", "Open Derictory", nullptr));
+        numer_frame->setText(QCoreApplication::translate("LockinAPPlite", "2000", nullptr));
+        rescan_button->setText(QCoreApplication::translate("LockinAPPlite", "Rescan lockins", nullptr));
+        prename->setText(QCoreApplication::translate("LockinAPPlite", "test", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("LockinAPPlite", "R", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("LockinAPPlite", "Nolinar", nullptr));
 
-        label_4->setText(QCoreApplication::translate("LockinAPP", "Disp mode", nullptr));
+        label_4->setText(QCoreApplication::translate("LockinAPPlite", "Disp mode", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("LockinAPP", "Time", nullptr));
+        ___qtablewidgetitem->setText(QCoreApplication::translate("LockinAPPlite", "Time", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QCoreApplication::translate("LockinAPP", "Signal", nullptr));
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("LockinAPPlite", "Signal", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class LockinAPP: public Ui_LockinAPP {};
+    class LockinAPPlite: public Ui_LockinAPPlite {};
 } // namespace Ui
 
 QT_END_NAMESPACE

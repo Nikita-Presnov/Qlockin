@@ -37,18 +37,18 @@ public:
     QLabel *label;
     QLCDNumber *progresslcdNumber;
     QLabel *period_label;
-    QPushButton *start_botton;
     QLabel *label_2;
     QDoubleSpinBox *period_value;
-    QPushButton *stop_botton;
     QLabel *label_3;
     QPushButton *dir_button;
     QLineEdit *numer_frame;
-    QPushButton *rescan_button;
     QSpacerItem *horizontalSpacer;
     QLineEdit *prename;
     QComboBox *comboBox;
     QLabel *label_4;
+    QPushButton *rescan_button;
+    QPushButton *start_botton;
+    QPushButton *stop_botton;
     QTableWidget *tableWidget;
     QwtPlot *qwtPlot_reference_r;
 
@@ -56,7 +56,7 @@ public:
     {
         if (LockinAPP->objectName().isEmpty())
             LockinAPP->setObjectName(QString::fromUtf8("LockinAPP"));
-        LockinAPP->resize(1037, 544);
+        LockinAPP->resize(1176, 544);
         QFont font;
         font.setPointSize(14);
         LockinAPP->setFont(font);
@@ -117,13 +117,6 @@ public:
 
         gridLayout->addWidget(period_label, 0, 0, 1, 1);
 
-        start_botton = new QPushButton(centralWidget);
-        start_botton->setObjectName(QString::fromUtf8("start_botton"));
-        sizePolicy2.setHeightForWidth(start_botton->sizePolicy().hasHeightForWidth());
-        start_botton->setSizePolicy(sizePolicy2);
-
-        gridLayout->addWidget(start_botton, 1, 8, 1, 1);
-
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
@@ -137,13 +130,6 @@ public:
         period_value->setValue(0.200000000000000);
 
         gridLayout->addWidget(period_value, 1, 0, 1, 1);
-
-        stop_botton = new QPushButton(centralWidget);
-        stop_botton->setObjectName(QString::fromUtf8("stop_botton"));
-        sizePolicy2.setHeightForWidth(stop_botton->sizePolicy().hasHeightForWidth());
-        stop_botton->setSizePolicy(sizePolicy2);
-
-        gridLayout->addWidget(stop_botton, 1, 9, 1, 1);
 
         label_3 = new QLabel(centralWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -161,11 +147,6 @@ public:
         numer_frame->setSizePolicy(sizePolicy2);
 
         gridLayout->addWidget(numer_frame, 1, 1, 1, 1);
-
-        rescan_button = new QPushButton(centralWidget);
-        rescan_button->setObjectName(QString::fromUtf8("rescan_button"));
-
-        gridLayout->addWidget(rescan_button, 1, 7, 1, 1);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -190,6 +171,25 @@ public:
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         gridLayout->addWidget(label_4, 0, 4, 1, 1);
+
+        rescan_button = new QPushButton(centralWidget);
+        rescan_button->setObjectName(QString::fromUtf8("rescan_button"));
+
+        gridLayout->addWidget(rescan_button, 0, 6, 1, 1);
+
+        start_botton = new QPushButton(centralWidget);
+        start_botton->setObjectName(QString::fromUtf8("start_botton"));
+        sizePolicy2.setHeightForWidth(start_botton->sizePolicy().hasHeightForWidth());
+        start_botton->setSizePolicy(sizePolicy2);
+
+        gridLayout->addWidget(start_botton, 0, 7, 1, 1);
+
+        stop_botton = new QPushButton(centralWidget);
+        stop_botton->setObjectName(QString::fromUtf8("stop_botton"));
+        sizePolicy2.setHeightForWidth(stop_botton->sizePolicy().hasHeightForWidth());
+        stop_botton->setSizePolicy(sizePolicy2);
+
+        gridLayout->addWidget(stop_botton, 1, 7, 1, 1);
 
 
         gridLayout_2->addLayout(gridLayout, 0, 0, 1, 2);
@@ -247,18 +247,18 @@ public:
         LockinAPP->setWindowTitle(QCoreApplication::translate("LockinAPP", "Qlock-in", nullptr));
         label->setText(QCoreApplication::translate("LockinAPP", "Frames", nullptr));
         period_label->setText(QCoreApplication::translate("LockinAPP", "Period, sec", nullptr));
-        start_botton->setText(QCoreApplication::translate("LockinAPP", "Start", nullptr));
         label_2->setText(QCoreApplication::translate("LockinAPP", "Output name", nullptr));
-        stop_botton->setText(QCoreApplication::translate("LockinAPP", "Stop", nullptr));
         label_3->setText(QCoreApplication::translate("LockinAPP", "Number", nullptr));
         dir_button->setText(QCoreApplication::translate("LockinAPP", "Open Derictory", nullptr));
         numer_frame->setText(QCoreApplication::translate("LockinAPP", "2000", nullptr));
-        rescan_button->setText(QCoreApplication::translate("LockinAPP", "Rescan lockins", nullptr));
         prename->setText(QCoreApplication::translate("LockinAPP", "test", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("LockinAPP", "R", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("LockinAPP", "Nolinar", nullptr));
 
         label_4->setText(QCoreApplication::translate("LockinAPP", "Disp mode", nullptr));
+        rescan_button->setText(QCoreApplication::translate("LockinAPP", "Rescan lockins", nullptr));
+        start_botton->setText(QCoreApplication::translate("LockinAPP", "Start", nullptr));
+        stop_botton->setText(QCoreApplication::translate("LockinAPP", "Stop", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("LockinAPP", "Time", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);

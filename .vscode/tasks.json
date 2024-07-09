@@ -31,7 +31,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command":"uic -o qlockin/ui_lockinapp.h lockinapp.ui && uic -o qlockin/ui_lockinapplite.h lockinapplite.ui"
+            "command":"uic -o qlockin/ui_lockinapp.h lockinapp.ui && uic -o qlockin-lite/ui_lockinapplite.h lockinapplite.ui"
         }
         // },
         // {

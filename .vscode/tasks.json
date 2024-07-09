@@ -17,7 +17,7 @@
         {
             "label": "Debug",
             "type": "shell",
-            "command": "cmake -DCMAKE_BUILD_TYPE=Debug -S . -B ./build/debug && cmake --build ./build/debug",
+            "command": "cmake -DCMAKE_BUILD_TYPE=Debug -G Ninja -S . -B ./build/debug && cmake --build ./build/debug",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -31,7 +31,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command":"uic -o src/ui_lockinapp.h lockinapp.ui "
+            "command":"uic -o qlockin/ui_lockinapp.h lockinapp.ui && uic -o qlockin/ui_lockinapplite.h lockinapplite.ui"
         }
         // },
         // {

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindow.ui'
+** Form generated from reading UI file 'lockinapp.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MAINWINDOW_H
-#define UI_MAINWINDOW_H
+#ifndef UI_LOCKINAPP_H
+#define UI_LOCKINAPP_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -57,6 +57,9 @@ public:
         if (LockinAPP->objectName().isEmpty())
             LockinAPP->setObjectName(QString::fromUtf8("LockinAPP"));
         LockinAPP->resize(1037, 544);
+        QFont font;
+        font.setPointSize(14);
+        LockinAPP->setFont(font);
         centralWidget = new QWidget(LockinAPP);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout_2 = new QGridLayout(centralWidget);
@@ -97,11 +100,11 @@ public:
         sizePolicy2.setHeightForWidth(progresslcdNumber->sizePolicy().hasHeightForWidth());
         progresslcdNumber->setSizePolicy(sizePolicy2);
         progresslcdNumber->setMinimumSize(QSize(0, 36));
-        QFont font;
-        font.setPointSize(20);
-        font.setBold(false);
-        font.setWeight(50);
-        progresslcdNumber->setFont(font);
+        QFont font1;
+        font1.setPointSize(20);
+        font1.setBold(false);
+        font1.setWeight(50);
+        progresslcdNumber->setFont(font1);
         progresslcdNumber->setDigitCount(5);
         progresslcdNumber->setProperty("intValue", QVariant(0));
 
@@ -274,4 +277,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINWINDOW_H
+#endif // UI_LOCKINAPP_H

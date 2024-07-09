@@ -17,15 +17,12 @@
         {
             "label": "Debug",
             "type": "shell",
-            "command": "cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j8",
+            "command": "cmake -DCMAKE_BUILD_TYPE=Debug -S . -B ./build/debug && cmake --build ./build/debug",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": "$gcc",
-            "options": {
-                "cwd": "${workspaceFolder}/build_debug"
-            }
+            "problemMatcher": "$gcc"
         },
         {
             "label": "uic",

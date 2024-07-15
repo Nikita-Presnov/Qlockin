@@ -130,7 +130,7 @@ void LockinAPPlite::updateval()
     outdata << timenow << '\t';
 #endif
     ui->tableWidget->item(progressframes, 1)->setText(QString::number(Y1[progressframes], 'g', 3));
-    outdata << Y1[progressframes] << '\t';
+    outdata << Y1[progressframes] << '\n';
     ui->tableWidget->setCurrentCell(progressframes, 0);
     if (progressframes != 0)
     {

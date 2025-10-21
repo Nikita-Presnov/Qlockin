@@ -9,11 +9,12 @@
 #include <qwt_picker_machine.h>
 #include <malloc.h>
 #include <time.h>
+#include <string.h>
 
 LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
-                                          ui(new Ui::LockinAPPlite)
+                                                ui(new Ui::LockinAPPlite)
 {
-    char idn2[] = IDN2; //{'7','0','2','5','9'};
+    // char idn2[] = IDN2; //{'7','0','2','5','9'};
     // char idn1[] = IDN1; //{'8','1','5','9','5'};
     ui->setupUi(this);
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -55,7 +56,7 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
 
     cruve_reference_signal->attach(ui->qwtPlot_reference_signal);
 
-    ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::yLeft, "Signal, 70259, mV");
+    ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::yLeft, "Signal, mV");
     ui->qwtPlot_reference_signal->setAxisTitle(QwtPlot::xBottom, "Time, s");
     ui->qwtPlot_reference_signal->replot();
 
@@ -63,16 +64,17 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
     char name2[PORT_NAME_LEN];
     loc2 = new lockin();
     // loc1 = new lockin();
+    QString idn2 = ui->lockin_ser->text();
 #ifndef OFFLINE_DEBUG
-    screach_lockin(idn2, name2);
-    if (!loc2->init(name2))
+    screach_lockin(idn2.toUtf8().data(), name2);
+    if (!loc2->init(idn2.toUtf8().data(), name2))
     {
         QMessageBox msbox;
-        msbox.setText("No locin with id 70259 for signal.");
+        QString text = QString("No locin with id %1 for signal.").arg(idn2);
+        msbox.setText(text);
         msbox.exec();
     }
 #endif
-    
 }
 
 LockinAPPlite::~LockinAPPlite()
@@ -102,7 +104,8 @@ void LockinAPPlite::updateval()
     if (!loc2->get_data())
     {
         QMessageBox msbox;
-        msbox.setText("No connection with locin 70259 (signal).");
+        QString text = QString("No connection with locin %1 (signal).").arg(loc2->id_n);
+        msbox.setText(text);
         msbox.exec();
         progressframes = numberframes;
     }
@@ -208,16 +211,18 @@ void LockinAPPlite::on_dir_button_clicked()
 void LockinAPPlite::on_rescan_button_clicked()
 {
 #ifndef OFFLINE_DEBUG
-    char idn2[] = IDN2; //{'7','0','2','5','9'};
+    // char idn2[] = IDN2; //{'7','0','2','5','9'};
+    QString idn2 = ui->lockin_ser->text();
 
     char name2[PORT_NAME_LEN];
     loc2->close_lockin();
-    screach_lockin(idn2, name2);
+    screach_lockin(idn2.toUtf8().data(), name2);
 
-    if (!loc2->init(name2))
+    if (!loc2->init(idn2.toUtf8().data(), name2))
     {
         QMessageBox msbox;
-        msbox.setText("No locin with id 70259 for signal.");
+        QString text = QString("No locin with id %1 for signal.").arg(idn2);
+        msbox.setText(text);
         msbox.exec();
     }
 #endif

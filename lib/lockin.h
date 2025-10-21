@@ -14,12 +14,13 @@ class lockin
 {
 public:
     lockin();
-    bool init(char *comname);
+    bool init(char *idn, char *comname);
     bool get_data(); // char *command);
     int send_command(char *command, int comlen);
     void close_lockin();
     int F_ID;
     char data[20];
+    char *id_n;
 };
 
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'lockinapplite.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.8
+** Created by: Qt User Interface Compiler version 5.15.15
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -34,21 +34,23 @@ public:
     QGridLayout *gridLayout_2;
     QwtPlot *qwtPlot_reference_signal;
     QGridLayout *gridLayout;
-    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_4;
+    QDoubleSpinBox *period_value;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *stop_botton;
+    QPushButton *rescan_button;
     QLCDNumber *progresslcdNumber;
     QLabel *period_label;
-    QLabel *label_2;
-    QDoubleSpinBox *period_value;
-    QLabel *label_3;
-    QPushButton *dir_button;
-    QLineEdit *numer_frame;
-    QSpacerItem *horizontalSpacer;
-    QLineEdit *prename;
-    QComboBox *comboBox;
-    QLabel *label_4;
-    QPushButton *rescan_button;
     QPushButton *start_botton;
-    QPushButton *stop_botton;
+    QLineEdit *prename;
+    QLineEdit *numer_frame;
+    QPushButton *dir_button;
+    QLabel *label;
+    QComboBox *comboBox;
+    QLabel *label_3;
+    QLabel *label_5;
+    QLineEdit *lockin_ser;
     QTableWidget *tableWidget;
 
     void setupUi(QMainWindow *LockinAPPlite)
@@ -81,21 +83,49 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy1);
+        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy1);
 
-        gridLayout->addWidget(label, 0, 1, 1, 1);
+        gridLayout->addWidget(label_2, 0, 2, 1, 1);
 
-        progresslcdNumber = new QLCDNumber(centralWidget);
-        progresslcdNumber->setObjectName(QString::fromUtf8("progresslcdNumber"));
+        label_4 = new QLabel(centralWidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout->addWidget(label_4, 0, 4, 1, 1);
+
+        period_value = new QDoubleSpinBox(centralWidget);
+        period_value->setObjectName(QString::fromUtf8("period_value"));
+        period_value->setSingleStep(0.100000000000000);
+        period_value->setValue(0.200000000000000);
+
+        gridLayout->addWidget(period_value, 1, 0, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
+
+        stop_botton = new QPushButton(centralWidget);
+        stop_botton->setObjectName(QString::fromUtf8("stop_botton"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(stop_botton->sizePolicy().hasHeightForWidth());
+        stop_botton->setSizePolicy(sizePolicy2);
+
+        gridLayout->addWidget(stop_botton, 1, 8, 1, 1);
+
+        rescan_button = new QPushButton(centralWidget);
+        rescan_button->setObjectName(QString::fromUtf8("rescan_button"));
+
+        gridLayout->addWidget(rescan_button, 0, 7, 1, 1);
+
+        progresslcdNumber = new QLCDNumber(centralWidget);
+        progresslcdNumber->setObjectName(QString::fromUtf8("progresslcdNumber"));
         sizePolicy2.setHeightForWidth(progresslcdNumber->sizePolicy().hasHeightForWidth());
         progresslcdNumber->setSizePolicy(sizePolicy2);
         progresslcdNumber->setMinimumSize(QSize(0, 36));
@@ -116,29 +146,19 @@ public:
 
         gridLayout->addWidget(period_label, 0, 0, 1, 1);
 
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy1);
+        start_botton = new QPushButton(centralWidget);
+        start_botton->setObjectName(QString::fromUtf8("start_botton"));
+        sizePolicy2.setHeightForWidth(start_botton->sizePolicy().hasHeightForWidth());
+        start_botton->setSizePolicy(sizePolicy2);
 
-        gridLayout->addWidget(label_2, 0, 2, 1, 1);
+        gridLayout->addWidget(start_botton, 0, 8, 1, 1);
 
-        period_value = new QDoubleSpinBox(centralWidget);
-        period_value->setObjectName(QString::fromUtf8("period_value"));
-        period_value->setSingleStep(0.100000000000000);
-        period_value->setValue(0.200000000000000);
+        prename = new QLineEdit(centralWidget);
+        prename->setObjectName(QString::fromUtf8("prename"));
+        sizePolicy2.setHeightForWidth(prename->sizePolicy().hasHeightForWidth());
+        prename->setSizePolicy(sizePolicy2);
 
-        gridLayout->addWidget(period_value, 1, 0, 1, 1);
-
-        label_3 = new QLabel(centralWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout->addWidget(label_3, 0, 3, 1, 1);
-
-        dir_button = new QPushButton(centralWidget);
-        dir_button->setObjectName(QString::fromUtf8("dir_button"));
-
-        gridLayout->addWidget(dir_button, 1, 6, 1, 1);
+        gridLayout->addWidget(prename, 1, 2, 1, 1);
 
         numer_frame = new QLineEdit(centralWidget);
         numer_frame->setObjectName(QString::fromUtf8("numer_frame"));
@@ -147,16 +167,17 @@ public:
 
         gridLayout->addWidget(numer_frame, 1, 1, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        dir_button = new QPushButton(centralWidget);
+        dir_button->setObjectName(QString::fromUtf8("dir_button"));
 
-        gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
+        gridLayout->addWidget(dir_button, 1, 7, 1, 1);
 
-        prename = new QLineEdit(centralWidget);
-        prename->setObjectName(QString::fromUtf8("prename"));
-        sizePolicy2.setHeightForWidth(prename->sizePolicy().hasHeightForWidth());
-        prename->setSizePolicy(sizePolicy2);
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy1);
 
-        gridLayout->addWidget(prename, 1, 2, 1, 1);
+        gridLayout->addWidget(label, 0, 1, 1, 1);
 
         comboBox = new QComboBox(centralWidget);
         comboBox->addItem(QString());
@@ -166,29 +187,20 @@ public:
 
         gridLayout->addWidget(comboBox, 1, 4, 1, 1);
 
-        label_4 = new QLabel(centralWidget);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        gridLayout->addWidget(label_4, 0, 4, 1, 1);
+        gridLayout->addWidget(label_3, 0, 3, 1, 1);
 
-        rescan_button = new QPushButton(centralWidget);
-        rescan_button->setObjectName(QString::fromUtf8("rescan_button"));
+        label_5 = new QLabel(centralWidget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout->addWidget(rescan_button, 0, 6, 1, 1);
+        gridLayout->addWidget(label_5, 0, 6, 1, 1);
 
-        start_botton = new QPushButton(centralWidget);
-        start_botton->setObjectName(QString::fromUtf8("start_botton"));
-        sizePolicy2.setHeightForWidth(start_botton->sizePolicy().hasHeightForWidth());
-        start_botton->setSizePolicy(sizePolicy2);
+        lockin_ser = new QLineEdit(centralWidget);
+        lockin_ser->setObjectName(QString::fromUtf8("lockin_ser"));
 
-        gridLayout->addWidget(start_botton, 0, 7, 1, 1);
-
-        stop_botton = new QPushButton(centralWidget);
-        stop_botton->setObjectName(QString::fromUtf8("stop_botton"));
-        sizePolicy2.setHeightForWidth(stop_botton->sizePolicy().hasHeightForWidth());
-        stop_botton->setSizePolicy(sizePolicy2);
-
-        gridLayout->addWidget(stop_botton, 1, 7, 1, 1);
+        gridLayout->addWidget(lockin_ser, 1, 6, 1, 1);
 
 
         gridLayout_2->addLayout(gridLayout, 0, 0, 1, 2);
@@ -232,20 +244,22 @@ public:
     void retranslateUi(QMainWindow *LockinAPPlite)
     {
         LockinAPPlite->setWindowTitle(QCoreApplication::translate("LockinAPPlite", "Qlock-in Lite", nullptr));
-        label->setText(QCoreApplication::translate("LockinAPPlite", "Frames", nullptr));
-        period_label->setText(QCoreApplication::translate("LockinAPPlite", "Period, sec", nullptr));
         label_2->setText(QCoreApplication::translate("LockinAPPlite", "Output name", nullptr));
-        label_3->setText(QCoreApplication::translate("LockinAPPlite", "Number", nullptr));
-        dir_button->setText(QCoreApplication::translate("LockinAPPlite", "Open Derictory", nullptr));
-        numer_frame->setText(QCoreApplication::translate("LockinAPPlite", "2000", nullptr));
+        label_4->setText(QCoreApplication::translate("LockinAPPlite", "Disp mode", nullptr));
+        stop_botton->setText(QCoreApplication::translate("LockinAPPlite", "Stop", nullptr));
+        rescan_button->setText(QCoreApplication::translate("LockinAPPlite", "Rescan lockins", nullptr));
+        period_label->setText(QCoreApplication::translate("LockinAPPlite", "Period, sec", nullptr));
+        start_botton->setText(QCoreApplication::translate("LockinAPPlite", "Start", nullptr));
         prename->setText(QCoreApplication::translate("LockinAPPlite", "test", nullptr));
+        numer_frame->setText(QCoreApplication::translate("LockinAPPlite", "2000", nullptr));
+        dir_button->setText(QCoreApplication::translate("LockinAPPlite", "Open Derictory", nullptr));
+        label->setText(QCoreApplication::translate("LockinAPPlite", "Frames", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("LockinAPPlite", "R", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("LockinAPPlite", "Nolinar", nullptr));
 
-        label_4->setText(QCoreApplication::translate("LockinAPPlite", "Disp mode", nullptr));
-        rescan_button->setText(QCoreApplication::translate("LockinAPPlite", "Rescan lockins", nullptr));
-        start_botton->setText(QCoreApplication::translate("LockinAPPlite", "Start", nullptr));
-        stop_botton->setText(QCoreApplication::translate("LockinAPPlite", "Stop", nullptr));
+        label_3->setText(QCoreApplication::translate("LockinAPPlite", "Number", nullptr));
+        label_5->setText(QCoreApplication::translate("LockinAPPlite", "Lockin ser", nullptr));
+        lockin_ser->setText(QCoreApplication::translate("LockinAPPlite", "70259", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("LockinAPPlite", "Time", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);

@@ -15,6 +15,16 @@
             "problemMatcher": []
         },
         {
+            "label": "Release",
+            "type": "shell",
+            "command": "cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -S . -B ./build/release && cmake --build ./build/release",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
             "label": "Debug",
             "type": "shell",
             "command": "cmake -DCMAKE_BUILD_TYPE=Debug -G Ninja -S . -B ./build/debug && cmake --build ./build/debug",

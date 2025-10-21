@@ -103,8 +103,9 @@ lockin::lockin()
  * @param comname: string with locin comport.
  * @return Status of connection.
  */
-bool lockin::init(char *comname)
+bool lockin::init(char *idn, char *comname)
 {
+    id_n = idn;
     F_ID = open(comname, O_RDWR); // | O_NOCTTY | O_NONBLOCK);
     if (F_ID == -1)
     {

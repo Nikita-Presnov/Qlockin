@@ -97,14 +97,14 @@ LockinAPP::LockinAPP(QWidget *parent) : QMainWindow(parent),
     screach_lockin(idn2, name2);
 
     // loc1 = new lockin();
-    if (!loc1->init(name1))
+    if (!loc1->init(idn1, name1))
     {
         QMessageBox msbox;
         msbox.setText("No locin with id 81595 for reference.");
         msbox.exec();
     }
     // loc2 = new lockin();
-    if (!loc2->init(name2))
+    if (!loc2->init(idn2, name2))
     {
         QMessageBox msbox;
         msbox.setText("No locin with id 70259 for signal.");
@@ -299,14 +299,14 @@ void LockinAPP::on_rescan_button_clicked()
     screach_lockin(idn1, name1);
     screach_lockin(idn2, name2);
 
-    if (!loc1->init(name1))
+    if (!loc1->init(idn1, name1))
     {
         QMessageBox msbox;
         msbox.setText("No locin with id 81595 for reference.");
         msbox.exec();
     }
 
-    if (!loc2->init(name2))
+    if (!loc2->init(idn2, name2))
     {
         QMessageBox msbox;
         msbox.setText("No locin with id 70259 for signal.");

@@ -54,13 +54,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Disp mode</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QDoubleSpinBox" name="period_value">
         <property name="singleStep">
@@ -71,7 +64,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="5">
+      <item row="0" column="4">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -84,7 +77,7 @@
         </property>
        </spacer>
       </item>
-      <item row="1" column="8">
+      <item row="1" column="7">
        <widget class="QPushButton" name="stop_botton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -97,7 +90,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="7">
+      <item row="0" column="6">
        <widget class="QPushButton" name="rescan_button">
         <property name="text">
          <string>Rescan lockins</string>
@@ -146,7 +139,21 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="8">
+      <item row="0" column="5">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Lockin ser</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLineEdit" name="lockin_ser">
+        <property name="text">
+         <string>70259</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
        <widget class="QPushButton" name="start_botton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -185,7 +192,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="7">
+      <item row="1" column="6">
        <widget class="QPushButton" name="dir_button">
         <property name="text">
          <string>Open Derictory</string>
@@ -205,41 +212,10 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="4">
-       <widget class="QComboBox" name="comboBox">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <item>
-         <property name="text">
-          <string>R</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Nolinar</string>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="0" column="3">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Number</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Lockin ser</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="6">
-       <widget class="QLineEdit" name="lockin_ser">
-        <property name="text">
-         <string>70259</string>
         </property>
        </widget>
       </item>

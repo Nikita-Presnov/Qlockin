@@ -19,20 +19,20 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 #   src/mainwindow.cpp
 # )
 
-file(GLOB LIBSOURSES "lib/*.cpp")
+file(GLOB CONTRIBSRC "contrib/*.cpp")
 file(GLOB QLOCKINSRC "qlockin/*.cpp")
 file(GLOB QLOCKINLITESRC "qlockin-lite/*.cpp")
 # file(GLOB HEADERS "src/*.h")
 
 
 # Tell CMake to create the helloworld executable
-add_executable(qlockin ${LIBSOURSES} ${QLOCKINSRC})
-target_include_directories(qlockin PRIVATE lib/ qlockin/)
+add_executable(qlockin ${CONTRIBSRC} ${QLOCKINSRC})
+target_include_directories(qlockin PRIVATE contrib/ qlockin/)
 # Use the Widgets module from Qt 5.
 target_link_libraries(qlockin Qt5::Widgets Qwt::Qwt)
 
-add_executable(qlockin-lite ${LIBSOURSES} ${QLOCKINLITESRC})
-target_include_directories(qlockin-lite PRIVATE lib/ qlockin/)
+add_executable(qlockin-lite ${CONTRIBSRC} ${QLOCKINLITESRC})
+target_include_directories(qlockin-lite PRIVATE contrib/ qlockin/)
 # Use the Widgets module from Qt 5.
 target_link_libraries(qlockin-lite Qt5::Widgets Qwt::Qwt)
 

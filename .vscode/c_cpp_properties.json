@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/lib/**",
+                "${workspaceFolder}/contrib/**",
                 "${workspaceFolder}/qlockin/**",
                 "/usr/include/x86_64-linux-gnu/qt5",
                 "/usr/include/x86_64-linux-gnu/qt5/QtWidgets",

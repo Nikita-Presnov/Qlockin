@@ -148,6 +148,12 @@
       </item>
       <item row="1" column="5">
        <widget class="QLineEdit" name="lockin_ser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>70259</string>
         </property>

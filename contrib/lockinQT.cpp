@@ -1,5 +1,5 @@
-#include "lockin.h"
 #ifdef QTSERIAL
+#include "lockin_qser.h"
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
@@ -9,7 +9,7 @@
  * @param locname: string to write lock-in COM port.
  * @return Screach status.
  */
-bool screach_lockin(char *idn, char *locname)
+bool screach_lockin_qser(char *idn, char *locname)
 {
     if(strlen(locname)!=12)
     {
@@ -41,7 +41,7 @@ bool screach_lockin(char *idn, char *locname)
     return false;
 }
 
-lockin::lockin()
+lockin_qser::lockin_qser()
 {
     this->serialPort = new QSerialPort();
 
@@ -54,17 +54,17 @@ lockin::lockin()
     this->serialPort->setParity(QSerialPort::NoParity);
     this->serialPort->setFlowControl(QSerialPort::NoFlowControl);
 }
-lockin::~lockin()
+lockin_qser::~lockin_qser()
 {
     this->serialPort->close();
 }
 /*!
  * @brief Opening of the com port.
- *        Use it after screach_lockin().
+ *        Use it after screach_lockin_qser().
  * @param comname: string with locin comport.
  * @return Status of connection.
  */
-bool lockin::init(char *comname)
+bool lockin_qser::init(char *comname)
 {
     return true;
 }
@@ -75,21 +75,21 @@ bool lockin::init(char *comname)
  * @param command: string with command to sending. Send OUTR?1\\r to get data from first display.
  * @return Number of bytes sent . If -1, then sending failed.
  */
-int lockin::send_command(char *command)
+int lockin_qser::send_command(char *command)
 {
     // return write(F_ID, command, strlen(command));
 }
 
 /*!
- * Reading data from a buffer into lockin::data.
+ * Reading data from a buffer into lockin_qser::data.
  * @return Is data read? true or false.
  */
-bool lockin::get_data()
+bool lockin_qser::get_data()
 {
     return true;
 }
 
-void lockin::close_lockin()
+void lockin_qser::close_lockin_qser()
 {
     // close(F_ID);
     this->serialPort->close();

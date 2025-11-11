@@ -1,4 +1,4 @@
-// #define OFFLINE_DEBUG 0
+#define OFFLINE_DEBUG 0
 #define ENABLE_TIME 1
 
 #include "lockinapplite.h"
@@ -74,6 +74,8 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
         msbox.setText(text);
         msbox.exec();
     }
+#else
+    
 #endif
 }
 

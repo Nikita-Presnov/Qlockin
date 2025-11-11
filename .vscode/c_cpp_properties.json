@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/contrib/**",
                 "${workspaceFolder}/qlockin/**",
+                "${workspaceFolder}/qlockin-lite/**",
                 "/usr/include/x86_64-linux-gnu/qt5",
                 "/usr/include/x86_64-linux-gnu/qt5/QtWidgets",
                 "/usr/include/x86_64-linux-gnu/qt5/QtCore",

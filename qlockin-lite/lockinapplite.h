@@ -34,7 +34,7 @@ public:
 private:
     Ui::LockinAPPlite *ui;
     QTimer *tmr;
-    lockin *loc2;
+    lockin loc2;
     // QSerialPort *locin1;
     // QSerialPort *locin2;
     QwtPlotPicker *d_picker2;
@@ -52,7 +52,8 @@ private:
     int numberframes = 0;
     int progressframes = 0;
     int period;
-    QThread lockinThread;
+    QThread thread_for_loc2;
+    lockin_t loc2_t;
 
 private slots:
     void on_start_botton_clicked();

@@ -24,7 +24,7 @@ public:
 };
 
 
-class threadlockin  : public QObject, public lockin
+class lockin_t  : public QObject, public lockin
 {
     Q_OBJECT
     // Свойство, управляющее работой потока
@@ -36,7 +36,7 @@ class threadlockin  : public QObject, public lockin
     QString m_message;
     int count; 
 public:
-    explicit threadlockin(QObject *parent = 0);
+    explicit lockin_t(QObject *parent = 0);
     bool running() const;
     QString message() const;
 signals:

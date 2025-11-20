@@ -16,6 +16,7 @@
         "fstream": "cpp",
         "qapplication": "cpp",
         "future": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "qfile": "cpp"
     }
 }

@@ -62,12 +62,15 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
 
     char name1[PORT_NAME_LEN];
     char name2[PORT_NAME_LEN];
-    loc2 = new lockin();
+    // loc2 = new lockin();
     // loc1 = new lockin();
+    connect(&thread_for_loc2, &QThread::started, &loc2_t, &lockin_t::run);
+    connect(&loc2_t, &lockin_t::finished, &thread_for_loc2, &QThread::terminate);
+    loc2_t.moveToThread(&thread_for_loc2);
     QString idn2 = ui->lockin_ser->text();
 #ifndef OFFLINE_DEBUG
     screach_lockin(idn2.toUtf8().data(), name2);
-    if (!loc2->init(idn2.toUtf8().data(), name2))
+    if (!loc2.init(idn2.toUtf8().data(), name2))
     {
         QMessageBox msbox;
         QString text = QString("No locin with id %1 for signal.").arg(idn2);
@@ -75,14 +78,14 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
         msbox.exec();
     }
 #else
-    
+
 #endif
 }
 
 LockinAPPlite::~LockinAPPlite()
 {
 #ifndef OFFLINE_DEBUG
-    loc2->close_lockin();
+    loc2.close_lockin();
 #endif
     delete ui;
 }
@@ -102,11 +105,11 @@ void LockinAPPlite::updateval()
 #endif
 
 #ifndef OFFLINE_DEBUG
-    loc2->send_command(outr, 7);
-    if (!loc2->get_data())
+    loc2.send_command(outr, 7);
+    if (!loc2.get_data())
     {
         QMessageBox msbox;
-        QString text = QString("No connection with locin %1 (signal).").arg(loc2->id_n);
+        QString text = QString("No connection with locin %1 (signal).").arg(loc2.id_n);
         msbox.setText(text);
         msbox.exec();
         progressframes = numberframes;
@@ -118,7 +121,7 @@ void LockinAPPlite::updateval()
 #endif
     QTextStream outdata(&outputfile);
 
-    QString qdata2 = QString(loc2->data);
+    QString qdata2 = QString(loc2.data);
 #ifdef ENABLE_TIME
     // Timeval[progressframes] = timenow;
 #endif
@@ -217,10 +220,10 @@ void LockinAPPlite::on_rescan_button_clicked()
     QString idn2 = ui->lockin_ser->text();
 
     char name2[PORT_NAME_LEN];
-    loc2->close_lockin();
+    loc2.close_lockin();
     screach_lockin(idn2.toUtf8().data(), name2);
 
-    if (!loc2->init(idn2.toUtf8().data(), name2))
+    if (!loc2.init(idn2.toUtf8().data(), name2))
     {
         QMessageBox msbox;
         QString text = QString("No locin with id %1 for signal.").arg(idn2);

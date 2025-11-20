@@ -114,6 +114,8 @@ void LockinAPPlite::updateval()
         msbox.exec();
         progressframes = numberframes;
     }
+#else
+
 #endif
 #ifdef ENABLE_TIME
     clock_gettime(CLOCK_MONOTONIC_RAW, &meshtime);
@@ -193,6 +195,8 @@ void LockinAPPlite::on_start_botton_clicked()
         // Timeval = X + numberframes;
         Y1 = X + numberframes;
         // Y2 = Y1 + numberframes;
+        loc2_t.setRunning(true);
+        thread_for_loc2.start();
     }
 }
 
@@ -204,6 +208,7 @@ void LockinAPPlite::on_stop_botton_clicked()
     ui->dir_button->setEnabled(true);
     free((void *)X);
     outputfile.close();
+    loc2_t.setRunning(false);
 }
 
 void LockinAPPlite::on_dir_button_clicked()

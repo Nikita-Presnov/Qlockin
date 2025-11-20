@@ -3,6 +3,7 @@
 #define LOCKIN_H
 
 #include <QObject>
+#include <QThread>
 
 #define PORT_NAME_LEN 13
 #define IDN1 "81595"

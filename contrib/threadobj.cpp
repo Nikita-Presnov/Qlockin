@@ -22,9 +22,14 @@ void lockin_t::run()
     // При значении false работа завершается
     while (m_running)
     {
-        count++;
-        emit sendMessage(m_message); // Высылаем данные, которые будут передаваться в другой поток
+        
+        // emit sendMessage(m_message); // Высылаем данные, которые будут передаваться в другой поток
         // qDebug() << m_message << " " << m_message_2 << " " << count;
+        printf("\r%4i", count);
+        count++;
+        // QTime::
+        QThread::msleep(200);
+
     }
     emit finished();
 }

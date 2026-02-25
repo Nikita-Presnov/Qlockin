@@ -1,0 +1,7 @@
+// команды modbus
+
+#define GET_ID 0x01031000
+#define GET_STATUS 0x01031004
+// #define SET_TEMP 0x01031004
+#define SET_POWER(X) 0x0103100F00000000 + X
+#define GET_TEMP 0x01031009

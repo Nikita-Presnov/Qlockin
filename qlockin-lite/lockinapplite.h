@@ -61,6 +61,7 @@ private slots:
     void on_dir_button_clicked();
     void on_rescan_button_clicked();
     void updateval();
+    void catch_val();
 };
 
 #endif // MAINWINDOW_H

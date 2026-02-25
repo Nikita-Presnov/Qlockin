@@ -65,7 +65,8 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
     // loc2 = new lockin();
     // loc1 = new lockin();
     connect(&thread_for_loc2, &QThread::started, &loc2_t, &lockin_t::run);
-    connect(&loc2_t, &lockin_t::finished, &thread_for_loc2, &QThread::terminate);
+    connect(&loc2_t, &lockin_t::finished, this, &LockinAPPlite::catch_val);
+    // connect(&loc2_t, &lockin_t::finished, &thread_for_loc2, &QThread::terminate);
     loc2_t.moveToThread(&thread_for_loc2);
     QString idn2 = ui->lockin_ser->text();
 #ifndef OFFLINE_DEBUG
@@ -161,6 +162,10 @@ void LockinAPPlite::updateval()
     }
 }
 
+void LockinAPPlite::catch_val()
+{
+
+}
 void LockinAPPlite::on_start_botton_clicked()
 {
     QString filename = dirname;

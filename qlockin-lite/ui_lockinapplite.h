@@ -172,8 +172,8 @@ public:
         lockin_ser->addItem(QString());
         lockin_ser->addItem(QString());
         lockin_ser->setObjectName(QString::fromUtf8("lockin_ser"));
-        lockin_ser->setEnabled(false);
-        lockin_ser->setEditable(true);
+        lockin_ser->setEnabled(true);
+        lockin_ser->setEditable(false);
 
         gridLayout->addWidget(lockin_ser, 1, 5, 1, 1);
 

@@ -1,4 +1,4 @@
-#define OFFLINE_DEBUG 0
+// #define OFFLINE_DEBUG 0
 #define ENABLE_TIME 1
 
 #include "lockinapplite.h"
@@ -68,7 +68,7 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
     connect(&loc2_t, &lockin_t::finished, this, &LockinAPPlite::catch_val);
     // connect(&loc2_t, &lockin_t::finished, &thread_for_loc2, &QThread::terminate);
     loc2_t.moveToThread(&thread_for_loc2);
-    QString idn2 = ui->lockin_ser->text();
+    QString idn2 = ui->lockin_ser->currentText();
 #ifndef OFFLINE_DEBUG
     screach_lockin(idn2.toUtf8().data(), name2);
     if (!loc2.init(idn2.toUtf8().data(), name2))
@@ -79,7 +79,10 @@ LockinAPPlite::LockinAPPlite(QWidget *parent) : QMainWindow(parent),
         msbox.exec();
     }
 #else
-
+    QMessageBox msbox;
+    QString text = QString("Hipotetic idn is %1 for signal.").arg(idn2);
+    msbox.setText(text);
+    msbox.exec();
 #endif
 }
 
@@ -227,7 +230,7 @@ void LockinAPPlite::on_rescan_button_clicked()
 {
 #ifndef OFFLINE_DEBUG
     // char idn2[] = IDN2; //{'7','0','2','5','9'};
-    QString idn2 = ui->lockin_ser->text();
+    QString idn2 = ui->lockin_ser->currentText();
 
     char name2[PORT_NAME_LEN];
     loc2.close_lockin();
